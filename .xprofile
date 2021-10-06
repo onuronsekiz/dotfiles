@@ -1,0 +1,5 @@
+export DXVK_HUD=fps
+export NO_AT_BRIDGE=1
+export QT_SCALE_FACTOR_ROUNDING_POLICY=Round
+loadkeys tr
+fc-cache
