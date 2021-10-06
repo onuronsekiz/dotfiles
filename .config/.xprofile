@@ -1,0 +1,8 @@
+export DXVK_HUD=fps
+export NO_AT_BRIDGE=1
+export QT_SCALE_FACTOR_ROUNDING_POLICY=Round
+loadkeys tr
+#setxkbmap tr -option kpdl:dot
+xcalib ~/.config/icc/lg_32gk850g.icc
+fc-cache
+
