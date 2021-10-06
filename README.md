@@ -5,4 +5,4 @@ awesomewm is heavily modified version of another user, others are my designs.
 
 Feel free to copy them.
 
-![screenshot](https://user-images.githubusercontent.com/76511536/136191435-ca4bcc3b-e4f7-4c96-932d-a043c6b7a579.png)
+![screenshot](https://user-images.githubusercontent.com/76511536/136191712-64489313-85c2-4cbf-9883-e5f43f6a1d5c.png)
