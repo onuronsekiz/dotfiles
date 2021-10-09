@@ -198,6 +198,7 @@ local function call_layout_info ()
 	}
 end
 
+-- {{{ Move client to same tag across screens
 local function move_client_to_screen (c,s)
 	local index = c.first_tag.index
 	c:move_to_screen()
@@ -425,11 +426,7 @@ clientkeys = my_table.join(
 		lain.util.magnify_client, {description = "magnify client", group = "client"}),
 	awful.key({modkey}, "v",
 		function(c)
-			if c.minimized then
-				c.minimized = false
-			else
-				c.minimized = true
-			end
+			c.minimized = true
 		end, {description = "minimize current window", group = "client"}),
 	awful.key({modkey}, "f",
 		function(c)
