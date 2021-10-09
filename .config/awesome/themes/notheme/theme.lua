@@ -16,7 +16,7 @@ theme.dir = os.getenv("HOME") .. "/.config/awesome/themes/notheme"
 theme.wallpaper = theme.dir .. "/void-wallpaper.png"
 theme.font = "Dejavu Sans 9"
 theme.mono_font = "Liberation Mono 10"
-theme.opacity = 0.95
+theme.opacity_normal = 0.95
 theme.fg_normal = '#ABB2BF'
 theme.fg_focus = '#ABB2BF'
 theme.fg_urgent = '#ABB2BF'
@@ -39,7 +39,7 @@ theme.notification_font = theme.font
 theme.notification_shape = gears.shape.rounded_rect
 theme.notification_border_color = theme.border_focus
 theme.notification_border_width = theme.border_width
-theme.notification_opacity = theme.opacity
+theme.notification_opacity = theme.opacity_normal
 
 theme.taglist_font = "icomoon-feather 9"
 theme.taglist_font_small = "icomoon-feather 8"
@@ -53,7 +53,7 @@ theme.hotkeys_shape = gears.shape.rounded_rect
 
 beautiful.tooltip_border_color = theme.border_focus
 beautiful.tooltip_border_width = theme.border_width
-beautiful.tooltip_opacity = theme.opacity
+beautiful.tooltip_opacity = theme.opacity_normal
 beautiful.tooltip_bg = theme.bg_normal
 beautiful.tooltip_fg = theme.fg_normal
 beautiful.tooltip_font = theme.font
@@ -324,21 +324,10 @@ function theme.at_screen_connect(s)
 	gears.wallpaper.maximized(theme.wallpaper, s)
 	
 	-- Tags
-	--awful.tag(awful.util.tagnames, s, awful.layout.layouts)
 	awful.tag(awful.util.tagnames, s, awful.layout.suit.tile ) 
 	
 	-- Create a promptbox for each screen
 	s.mypromptbox = awful.widget.prompt()
-	-- Create an imagebox widget which will contains an icon indicating which layout we're using.
-	-- We need one layoutbox per screen.
-	s.mylayoutbox = awful.widget.layoutbox(s)
-	s.mylayoutbox:buttons(my_table.join(
-		awful.button({}, 1, function() awful.layout.inc(1) end),
-		awful.button({}, 2, function() awful.layout.set(awful.layout.layouts[1]) end),
-		awful.button({}, 3, function() awful.layout.inc(-1) end),
-		awful.button({}, 4, function() awful.layout.inc(1) end),
-		awful.button({}, 5, function() awful.layout.inc(-1) end))
-	)
 	
 	-- Create a taglist widget
 	s.mytaglist = awful.widget.taglist {
@@ -467,7 +456,7 @@ function theme.at_screen_connect(s)
 				{
 					widget = wibox.widget.systray(),
 				},
-				spacing = 0, layout = wibox.layout.fixed.horizontal}, margins = 2, layout = wibox.container.margin}, widget = wibox.container.background}, 0,0,2,2),
+				spacing = 0, layout = wibox.layout.fixed.horizontal}, margins = 1, layout = wibox.container.margin}, widget = wibox.container.background}, 0,0,4,3),
 			clock,
 			slspr,
 			wibox.layout.margin(logout_menu_widget(),0,-1,-1,0),
