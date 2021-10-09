@@ -28,7 +28,7 @@ theme.border_normal = '#383C44'
 theme.border_focus = '#555C69'
 theme.border_marked = '#ABB2BF'
 theme.border_hover = '#515865'
-theme.border_width = 1
+theme.border_width = 2
 theme.tasklist_bg_focus = '#383C44'
 theme.tasklist_plain_task_name = true
 theme.tasklist_disable_icon = true
@@ -38,7 +38,7 @@ theme.gap_single_client = true
 theme.notification_font = theme.font
 theme.notification_shape = gears.shape.rounded_rect
 theme.notification_border_color = theme.border_focus
-theme.notification_border_width = theme.border_width
+theme.notification_border_width = 1
 theme.notification_opacity = theme.opacity_normal
 
 theme.taglist_font = "icomoon-feather 9"
@@ -46,13 +46,13 @@ theme.taglist_font_small = "icomoon-feather 8"
 
 theme.hotkeys_hide_without_description = false
 theme.hotkeys_border_color = theme.border_hover
-theme.hotkeys_border_width = theme.border_width
+theme.hotkeys_border_width = 1
 theme.hotkeys_font = theme.mono_font
 theme.hotkeys_description_font = theme.mono_font
 theme.hotkeys_shape = gears.shape.rounded_rect
 
 beautiful.tooltip_border_color = theme.border_focus
-beautiful.tooltip_border_width = theme.border_width
+beautiful.tooltip_border_width = 1
 beautiful.tooltip_opacity = theme.opacity_normal
 beautiful.tooltip_bg = theme.bg_normal
 beautiful.tooltip_fg = theme.fg_normal
@@ -415,7 +415,7 @@ function theme.at_screen_connect(s)
 		width = screen[s].geometry.width - 16,
 		height = 22, y = sgeo.y + 4, x = sgeo.x + 8,
 		shape = gears.shape.rounded_bar,
-		border_width = theme.border_width,
+		border_width = 1,
 		border_color = theme.border_normal,
 		visible = true,
 	}
