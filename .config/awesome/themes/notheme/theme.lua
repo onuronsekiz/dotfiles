@@ -460,7 +460,7 @@ function theme.at_screen_connect(s)
 			clock,
 			slspr,
 			wibox.layout.margin(logout_menu_widget(),0,-1,-1,0),
-			slspr,
+			slspr,slspr,
 		}
 	}
 	s.mywibox:struts({
