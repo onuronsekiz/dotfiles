@@ -124,7 +124,7 @@ local cpu_tooltip = awful.tooltip {
 	margins_leftright = 10,
 	font = theme.mono_font,
 	timer_function = function()
-		local cmd = [[ps -eo pcpu,pid,user,args | (sed -u 1q ; sort -k 1 -r) | head -10 | awk '{for (i=1;i<=4;i++){printf("%s\t",$i)}print "" }' && printf "..."]]
+		local cmd = [[ps -eo pcpu,pid,user,args | sort -k 1 -r | head -10 | awk '{for (i=1;i<=4;i++){printf("%s\t",$i)}print "" }' && printf "..."]]
 		awful.spawn.easy_async_with_shell(cmd, function(result) cpu_tooltip_text = result end)
 		cpu_tooltip_text = string.format("%s\n\n%s", "<b>Process information</b>", cpu_tooltip_text):gsub("\n[^\n]*$", "")
 		return cpu_tooltip_text
