@@ -103,7 +103,7 @@ local mem_tooltip = awful.tooltip {
 	margins_leftright = 10,
 	font = theme.mono_font,
 	timer_function = function()
-		local cmd = [[free -h | awk '{for (i=1;i<=4;i++){printf("%s\t",$i)}print "" }']]
+		local cmd = [[free -h | awk '{if ($NL<2) printf("\t%s\t%s\t%s\n",$1,$2,$3); else {for (i=1;i<=4;i++){printf("%s\t",$i)}print "" };}']]
 		awful.spawn.easy_async_with_shell(cmd, function(result) mem_tooltip_text = result end)
 		mem_tooltip_text = string.format("%s\n\n%s", "<b>Memory information</b>", mem_tooltip_text):gsub("\n[^\n]*$", "")
 		return mem_tooltip_text
