@@ -82,12 +82,12 @@ end)
 
 -- Calendar
 theme.cal = lain.widget.cal({
-		attach_to = {clock},
-		notification_preset = {
-			font = theme.mono_font,
-			fg = theme.fg_normal,
-			bg = theme.bg_normal,
-		}
+	attach_to = {clock},
+	notification_preset = {
+		font = theme.mono_font,
+		fg = theme.fg_normal,
+		bg = theme.bg_normal,
+	}
 })
 
 -- MEM
