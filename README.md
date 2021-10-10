@@ -7,10 +7,12 @@ others are my designs.
 Feel free to copy them.
 
 Requirements
-- music widget       : mocp
-- disk mount/unmount : udisks2 (with polkit rule)
-- volume widget      : pulsemixer + alsautils
-- net widget         : wget (for public ip, can be changed with curl)
+- music widget         : mocp
+- disk mount/unmount   : udisks2 (with polkit rule)
+- volume widget        : pulsemixer + alsautils
+- net widget           : wget (for public ip, can be changed with curl)
+- theming              : qt5ct + lxappearance
+- shortcut tool        : xdotool (for onboard keyboard)
 
 Other requirements like terminal, browser, filemanager can be changed through `rc.lua`.
 
