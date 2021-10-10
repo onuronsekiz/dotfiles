@@ -1,6 +1,8 @@
 # dotfiles
 awesomewm, alacritty, rofi, ranger, vim config files for voidlinux.
 
+support for both single screen and multi screens with different resolutions.
+
 config for awesomewm is heavily modified version of another user. 
 others are my designs.
 
