@@ -76,7 +76,6 @@ local keyboardlayout = awful.widget.keyboardlayout:new()
 awful.util.tagnames = {"  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  "}
 
 -- Textclock
---local clockicon = wibox.widget.imagebox(theme.widget_clock)
 local clock = awful.widget.watch("date +'%R'", 60, function(widget, stdout)
 	widget:set_markup(" " .. stdout)
 end)
@@ -98,7 +97,6 @@ local mem = lain.widget.mem({
 	end
 })
 
-
 -- CPU
 local cpuicon = wibox.widget.textbox('<span color="#E06C75">CPU:  </span>')
 local cpu = lain.widget.cpu({
@@ -106,7 +104,6 @@ local cpu = lain.widget.cpu({
 				widget:set_markup('<span color="#E06C75">' .. cpu_now.usage .. '%</span>')
 		end
 })
-
 
 -- Battery
 local baticon = wibox.widget.textbox('<span color="#61AFEF">BAT:  </span>')
@@ -215,7 +212,7 @@ local vol_tooltip = awful.tooltip {
 	end,
 }
 
--- Music
+-- Music (MOC)
 local prev_icon = wibox.widget.textbox('')
 local next_icon = wibox.widget.textbox('')
 local stop_icon = wibox.widget.textbox('')
@@ -319,7 +316,7 @@ local slspr = wibox.widget.textbox(' ')
 
 --}}}
 
---{{{ vreate wibar functions for all screens
+--{{{ create wibar functions for all screens
 function theme.at_screen_connect(s)
 	gears.wallpaper.maximized(theme.wallpaper, s)
 	
