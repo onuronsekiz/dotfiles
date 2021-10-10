@@ -11,8 +11,8 @@ Requirements
 - disk mount/unmount   : udisks2 (with polkit rule)
 - volume widget        : pulsemixer + alsautils
 - net widget           : wget (for public ip, can be changed with curl)
-- theming              : qt5ct + lxappearance
 - shortcut tool        : xdotool (for onboard keyboard)
+- theming              : qt5ct + lxappearance (optional)
 
 Other requirements like terminal, browser, filemanager can be changed through `rc.lua`.
 
