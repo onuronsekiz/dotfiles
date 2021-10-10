@@ -16,4 +16,5 @@ Requirements
 
 Other requirements like terminal, browser, filemanager can be changed through `rc.lua`.
 
-![screenshot](https://user-images.githubusercontent.com/76511536/136191712-64489313-85c2-4cbf-9883-e5f43f6a1d5c.png)
+![screenshot](https://user-images.githubusercontent.com/76511536/136713974-d1df017b-53c2-4953-916c-9d52a8adb194.png)
+
