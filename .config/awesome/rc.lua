@@ -43,6 +43,7 @@ end
 local webbrowser = "firefox"
 local filebrowser = "pcmanfm-qt"
 local terminal = "alacritty"
+local edito = "vim"
 local themes = {"notheme"}
 local chosen_theme = themes[1]
 local modkey = "Mod4"
