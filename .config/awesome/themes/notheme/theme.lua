@@ -79,6 +79,7 @@ awful.util.tagnames = {"  ", "  ", "  ", "  ", "  ", "  ", " �
 local clock = awful.widget.watch("date +'%R'", 60, function(widget, stdout)
 	widget:set_markup(" " .. stdout)
 end)
+
 -- Calendar
 theme.cal = lain.widget.cal({
 		attach_to = {clock},
@@ -97,6 +98,19 @@ local mem = lain.widget.mem({
 	end
 })
 
+local mem_tooltip = awful.tooltip {
+	objects = { memicon },
+	margins_topbottom = 6,
+	margins_leftright = 10,
+	font = theme.mono_font,
+	timer_function = function()
+		local cmd = [[free -h | awk '{for (i=1;i<=4;i++){printf("%s\t",$i)}print "" }']]
+		awful.spawn.easy_async_with_shell(cmd, function(result) mem_tooltip_text = result end)
+		mem_tooltip_text = string.format("%s\n\n%s", "<b>Memory information</b>", mem_tooltip_text):gsub("\n[^\n]*$", "")
+		return mem_tooltip_text
+	end,
+}
+
 -- CPU
 local cpuicon = wibox.widget.textbox('<span color="#E06C75">CPU:  </span>')
 local cpu = lain.widget.cpu({
@@ -105,17 +119,54 @@ local cpu = lain.widget.cpu({
 		end
 })
 
+local cpu_tooltip = awful.tooltip {
+	objects = { cpuicon },
+	margins_topbottom = 6,
+	margins_leftright = 10,
+	font = theme.mono_font,
+	timer_function = function()
+		local cmd = [[ps -eo pcpu,pid,user,args | (sed -u 1q ; sort -k 1 -r) | head -10 | awk '{for (i=1;i<=4;i++){printf("%s\t",$i)}print "" }']]
+		awful.spawn.easy_async_with_shell(cmd, function(result) cpu_tooltip_text = result end)
+		cpu_tooltip_text = string.format("%s\n\n%s", "<b>Process information</b>", cpu_tooltip_text):gsub("\n[^\n]*$", "")
+		return cpu_tooltip_text
+	end,
+}
+
+-- FileSystem
+local fsicon = wibox.widget.textbox('<span color="#9A3AC7">FS:  </span>')
+local fsroot = awful.widget.watch([[bash -c "df -h / | tail -n 1 | awk '{print $(NF-1)}'"]], 60, function(widget,stdout)
+        widget:set_markup('<span color="#9A3AC7">' .. stdout .. '</span>')
+end)
+
+local fs_tooltip = awful.tooltip {
+	objects = { fsicon },
+	font = theme.mono_font,
+	margins_topbottom = 6,
+	margins_leftright = 10,
+	timer_function = function()
+		local cmd = [[df -h]]
+		awful.spawn.easy_async_with_shell(cmd, function(result) fs_tooltip_text = result end)
+		fs_tooltip_text = string.format("%s", fs_tooltip_text):gsub("\n[^\n]*$", "")
+		if fs_tooltip_text == "nil" then
+			fs_tooltip_text = "<b>No Disc Info</b>"
+		else
+			fs_tooltip_text = string.format("%s\n\n%s", "<b>Disc information</b>", fs_tooltip_text)
+		end
+		return fs_tooltip_text
+	end,
+}
+
 -- Battery
 local baticon = wibox.widget.textbox('<span color="#61AFEF">BAT:  </span>')
 local bat = lain.widget.bat({
-		battery = "BAT0",
-		settings = function()
-			if bat_now.status ~= "N/A" then
-				widget:set_markup('<span color="#61AFEF">' .. bat_now.perc .. '%</span>')
-			else
-				widget:set_markup('<span color="#61AFEF">' .. "AC" .. '</span>')
-			end
+	battery = "BAT0",
+	settings = function()
+		if bat_now.status ~= "N/A" then
+			widget:set_markup('<span color="#61AFEF">' .. bat_now.perc .. '%</span>')
+		else
+			widget:set_markup('<span color="#61AFEF">' .. "AC" .. '</span>')
 		end
+	end
 })
 
 local bat_tooltip = awful.tooltip {
@@ -433,6 +484,9 @@ function theme.at_screen_connect(s)
 			eth_icon,
 			neticon,
 			net,
+			spr,
+			fsicon,
+			fsroot,
 			spr,
 			memicon,
 			mem,
