@@ -147,7 +147,7 @@ local fs_tooltip = awful.tooltip {
 		awful.spawn.easy_async_with_shell(cmd, function(result) fs_tooltip_text = result end)
 		fs_tooltip_text = string.format("%s", fs_tooltip_text):gsub("\n[^\n]*$", "")
 		if fs_tooltip_text == "nil" then
-			fs_tooltip_text = "<b>No Filesystem found</b>"
+			fs_tooltip_text = "<b>Filesystem not found</b>"
 		else
 			fs_tooltip_text = string.format("%s\n\n%s", "<b>Filesystem information</b>", fs_tooltip_text)
 		end
