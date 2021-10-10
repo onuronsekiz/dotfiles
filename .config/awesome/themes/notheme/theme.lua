@@ -5,7 +5,6 @@ local awful = require("awful")
 local beautiful = require("beautiful")
 local wibox = require("wibox")
 local naughty = require("naughty")
---local dpi = require("beautiful.xresources").apply_dpi
 local udisks = require("widgets.udisks-widget.udisks")
 local logout_menu_widget = require("widgets.logout-menu-widget.logout-menu")
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
