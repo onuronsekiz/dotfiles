@@ -14,7 +14,7 @@ Requirements
 - shortcut tool        : xdotool (for onboard keyboard)
 - theming              : qt5ct + lxappearance (optional)
 
-Other requirements like terminal, browser, filemanager can be changed through `rc.lua`.
+Other requirements like terminal, browser, filemanager can be changed through `rc.lua` and `theme.lua` according to your taste.
 
 ![screenshot](https://user-images.githubusercontent.com/76511536/136713974-d1df017b-53c2-4953-916c-9d52a8adb194.png)
 
