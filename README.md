@@ -19,6 +19,7 @@ Requirements
 - theming              : qt5ct + lxappearance (optional)
 
 Other requirements like terminal, browser, filemanager can be changed through `rc.lua` and `theme.lua` according to your taste.
+DON'T FORGET TO CHANGE `loadkeys` language in `.xprofile` according to your language.
 
 ![2021-10-11_01-22](https://user-images.githubusercontent.com/76511536/136715002-1e41b69c-f634-48dd-b2c6-a4cbf2688385.png)
 
