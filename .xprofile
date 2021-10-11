@@ -1,5 +1,6 @@
 export DXVK_HUD=fps
 export NO_AT_BRIDGE=1
 export QT_SCALE_FACTOR_ROUNDING_POLICY=Round
+QT_QPA_PLATFORMTHEME=qt5ct 
 loadkeys tr
 fc-cache
