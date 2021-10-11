@@ -583,11 +583,11 @@ awful.rules.rules = {
 			class = {
 				"Arandr", "Nautilus", "Gnome-calculator", "feh", "Blueman-manager", "Gpick", "Kruler", "MessageWin", -- kalarm.
 				"Sxiv", "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
-				"Wpa_gui", "veromix", "xtightvncviewer"},
+				"Wpa_gui", "veromix", "xtightvncviewer", "xvkbd"},
 			-- Note that the name property shown in xprop might be set slightly after creation of the client
 			-- and the name shown there might not match defined rules here.
-			name = {"Event Tester" -- xev.
-				},
+			name = {"Event Tester", -- xev.
+				"xvkbd - Virtual Keyboard"},
 			role = {"AlarmWindow", -- Thunderbird's calendar.
 					"ConfigManager", -- Thunderbird's about:config.
 					"pop-up", -- e.g. Google Chrome's (detached) Developer Tools.
