@@ -3,6 +3,8 @@ awesomewm, alacritty, rofi, ranger, vim config files for voidlinux.
 
 support for both single screen and multi screens with different resolutions.
 
+near all bar elements have tooltips on them triggered with mouse:enter.
+
 config for awesomewm is heavily modified version of another user. 
 alacritty and rofi designs are mine.
 
