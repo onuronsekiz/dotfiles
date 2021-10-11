@@ -2,7 +2,7 @@
 awesomewm, alacritty, rofi, ranger, vim config files for voidlinux.
 
 config for awesomewm is heavily modified version of another user. 
-alacritty and rofi designs are mine.
+alacrity, rofi and mocp designs are mine.
 
 support for both single screen and multi screens with different resolutions.
 
