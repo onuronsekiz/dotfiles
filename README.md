@@ -12,6 +12,7 @@ Feel free to copy them.
 
 Requirements
 - music widget         : mocp
+- logout widget        : polkit rule or sudoers for poweroff, reboot, zzz
 - disk mount/unmount   : udisks2 (with polkit rule)
 - volume widget        : pulsemixer + alsautils
 - net widget           : wget (for public ip, can be changed with curl)
