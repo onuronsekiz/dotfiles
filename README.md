@@ -20,6 +20,6 @@ Other requirements like terminal, browser, filemanager can be changed through `r
 
 ![2021-10-11_01-22](https://user-images.githubusercontent.com/76511536/136715002-1e41b69c-f634-48dd-b2c6-a4cbf2688385.png)
 
-![2021-10-11_03-42](https://user-images.githubusercontent.com/76511536/136718925-162a142a-63dd-4528-9747-c219a9e984df.png)
+![2021-10-11_03-46](https://user-images.githubusercontent.com/76511536/136719062-737feaab-b1a4-4336-b55d-4f9b1d67d753.png)
 
 ![2021-10-11_03-44](https://user-images.githubusercontent.com/76511536/136719008-8632ef68-0c8e-4d35-8275-39772e8d01bc.png)
