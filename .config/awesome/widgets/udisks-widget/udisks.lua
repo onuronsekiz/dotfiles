@@ -234,7 +234,7 @@ local function scan_finished(devices)
 					border_width = beautiful.border_width,
 					bg = beautiful.bg_normal,
 					fg = beautiful.fg_normal,
-					opacity = beautiful.opacity,
+					opacity = beautiful.opacity_normal,
 					shape = gears.shape.rounded_rect,
 					margins_leftright = 10,
 					margins_topbottom = 6,
