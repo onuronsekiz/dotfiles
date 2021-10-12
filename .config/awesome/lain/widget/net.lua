@@ -20,12 +20,12 @@ function convert_size( oSize ) -- convert size from bytes to human readable form
 		nSize = string.format("%sT", math.floor (oSize * 100 / 1099511627776) / 100 )
 	elseif oSize > 1073741824 then
 		nSize = string.format("%sG", math.floor (oSize / 1073741824))
-	elseif oSize> 10485760 then
+	elseif oSize> 1048576 then
 		nSize = string.format("%sM", math.floor (oSize / 1048576))
-	elseif oSize > 10240 then
+	elseif oSize > 1024 then
 		nSize = string.format("%sK", math.floor (oSize / 1024))
 	else
-		nSize = string.format("%sB", oSize)
+		nSize = string.format("%sB", math.floor (oSize))
 	end
 	return ( nSize )
 end
