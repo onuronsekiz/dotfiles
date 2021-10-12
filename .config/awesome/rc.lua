@@ -595,10 +595,13 @@ awful.rules.rules = {
 		properties = {floating = false}},
 	{rule_any = {type = {"dialog", "normal"}}, properties = {titlebars_enabled = false}},
 	--{rule_any = {type = {"dialog"}}, properties = {titlebars_enabled = true, ontop = true}},
-	{rule = {class = "Notepadqq", name = "Search"}, properties = {ontop = true, titlebars_enabled = true }}
 	--{rule = {class = "Gimp", role = "gimp-image-window"}, properties = {maximized = true}},
-		-- Set Firefox to always map on the tag named "2" on screen 1.
-		-- { rule = { class = "Firefox" }, properties = { screen = 1, tag = "2" } },
+	{rule = {class = "Notepadqq", name = "Search"}, properties = {ontop = true, titlebars_enabled = true }}
+	{rule = {class = "Mate-calc", name = "Calculator"}, properties = {ontop = true}},
+	{rule = {class = "CMST - Connman System Tray", name = "Connman System Tray"}, properties = {ontop = true}},
+	{rule = {class = "Lxrandr", name = "Display Settings"}, properties = {ontop = true}},
+	-- Set Firefox to always map on the tag named "2" on screen 1.
+	-- { rule = { class = "Firefox" }, properties = { screen = 1, tag = "2" } },
 }
 
 
