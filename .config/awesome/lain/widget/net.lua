@@ -14,11 +14,26 @@ local string  = string
 -- Network infos
 -- lain.widget.net
 
+function convert_size( oSize ) -- convert size from bytes to human readable form.
+	local oldsize = cSize
+	if oSize > 1099511627776 then
+		nSize = string.format("%sT", math.floor (oSize * 100 / 1099511627776) / 100 )
+	elseif oSize > 1073741824 then
+		nSize = string.format("%sG", math.floor (oSize / 1073741824))
+	elseif oSize> 10485760 then
+		nSize = string.format("%sM", math.floor (oSize / 1048576))
+	elseif oSize > 10240 then
+		nSize = string.format("%sK", math.floor (oSize / 1024))
+	else
+		nSize = string.format("%sB", oSize)
+	end
+	return ( nSize )
+end
+
 local function factory(args)
     local net        = { widget = wibox.widget.textbox(), devices = {} }
     local args       = args or {}
     local timeout    = args.timeout or 2
-    local units      = args.units or 1024 -- KB
     local notify     = args.notify or "on"
     local wifi_state = args.wifi_state or "off"
     local eth_state  = args.eth_state or "off"
@@ -55,14 +70,14 @@ local function factory(args)
             dev_now.carrier  = helpers.first_line(string.format("/sys/class/net/%s/carrier", dev)) or "0"
             dev_now.state    = helpers.first_line(string.format("/sys/class/net/%s/operstate", dev)) or "down"
 
-            dev_now.sent     = (now_t - dev_before.last_t) / timeout / units
-            dev_now.received = (now_r - dev_before.last_r) / timeout / units
+            dev_now.sent     = (now_t - dev_before.last_t) / timeout
+            dev_now.received = (now_r - dev_before.last_r) / timeout
 
             net_now.sent     = net_now.sent + dev_now.sent
             net_now.received = net_now.received + dev_now.received
 
-            dev_now.sent     = string.format("%.1f", dev_now.sent)
-            dev_now.received = string.format("%.1f", dev_now.received)
+            dev_now.sent     = string.format("%s", convert_size(dev_now.sent))
+            dev_now.received = string.format("%s", convert_size(dev_now.received))
 
             dev_now.last_t   = now_t
             dev_now.last_r   = now_r
@@ -98,8 +113,8 @@ local function factory(args)
             -- the totals across all specified devices
         end
 
-        net_now.sent = string.format("%.1f", net_now.sent)
-        net_now.received = string.format("%.1f", net_now.received)
+        net_now.sent = string.format("%s", convert_size(net_now.sent))
+        net_now.received = string.format("%s", convert_size(net_now.received))
 
         widget = net.widget
         settings()
