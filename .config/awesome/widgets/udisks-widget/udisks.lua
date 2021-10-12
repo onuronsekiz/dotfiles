@@ -9,7 +9,6 @@ local awful     = require("awful")
 local naughty   = require("naughty")
 local math = require("math")
 
-
 local system_bus = Gio.bus_get_sync(Gio.BusType.SYSTEM)
 
 local devices = {}
