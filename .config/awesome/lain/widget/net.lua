@@ -14,7 +14,7 @@ local string  = string
 -- Network infos
 -- lain.widget.net
 
-function convert_size( oSize ) -- convert size from bytes to human readable form.
+local function convert_size( oSize ) -- convert size from bytes to human readable form.
 	if oSize > 1099511627776 then
 		nSize = string.format("%sT", math.floor (oSize * 100 / 1099511627776) / 100 )
 	elseif oSize > 1073741824 then
