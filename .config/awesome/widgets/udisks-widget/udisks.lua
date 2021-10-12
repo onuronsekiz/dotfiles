@@ -18,15 +18,15 @@ local devices_layout = wibox.layout.fixed.horizontal()
 
 local function convert_size( oSize ) -- convert size from bytes to human readable form.
 	if oSize > 1099511627776 then
-		nSize = string.format("%sT", math.floor (oSize * 100 / 1099511627776) / 100 )
+		nSize = string.format("%s TB", math.floor (oSize * 100 / 1099511627776) / 100 )
 	elseif oSize > 1073741824 then
-		nSize = string.format("%sG", math.floor (oSize / 1073741824) )
+		nSize = string.format("%s GB", math.floor (oSize / 1073741824) )
 	elseif oSize> 1048576 then
-		nSize = string.format("%sM", math.floor (oSize / 1048576 ) )
+		nSize = string.format("%s MB", math.floor (oSize / 1048576 ) )
 	elseif oSize > 1024 then
-		nSize = string.format("%sK", math.floor (oSize / 1024) )
+		nSize = string.format("%s KB", math.floor (oSize / 1024) )
 	else
-		nSize = string.format("%sB", math.floor (oSize) )
+		nSize = string.format("%s B", math.floor (oSize) )
 	end
 	return ( nSize )
 end
