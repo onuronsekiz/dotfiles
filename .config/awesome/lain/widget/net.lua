@@ -16,11 +16,13 @@ local string  = string
 
 local function convert_size( oSize ) -- convert size from bytes to human readable form.
 	if oSize > 1099511627776 then
-		nSize = string.format("%sT", math.floor (oSize * 100 / 1099511627776) / 100 )
+		nSize = string.format("%.3gT", math.floor (oSize * 100 / 1099511627776) / 100 )
 	elseif oSize > 1073741824 then
-		nSize = string.format("%sG", math.floor (oSize / 1073741824) )
+		nSize = string.format("%.3gG", math.floor (oSize * 100 / 1073741824) / 100 )
+	elseif oSize> 104860000 then
+		nSize = string.format("%.4gM", math.floor (oSize / 1048576) )
 	elseif oSize> 1048576 then
-		nSize = string.format("%.3gM", math.floor (oSize * 100 / 1048576 ) / 100 )
+		nSize = string.format("%.3gM", math.floor (oSize * 100 / 1048576) / 100 )
 	elseif oSize > 1024 then
 		nSize = string.format("%.4gK", math.floor (oSize / 1024) )
 	else
