@@ -49,7 +49,9 @@ local chosen_theme = themes[1]
 local modkey = "Mod4"
 local altkey = "Mod1"
 local vi_focus = false
-local cycle_prev = true 
+local cycle_prev = true
+local theme_path = os.getenv("HOME") .. "/.config/awesome/themes/" .. chosen_theme
+local awesome_icon = theme_path .. "/icons/awesome16.png"
 
 awful.layout.layouts = {
 	awful.layout.suit.tile, 
@@ -69,7 +71,7 @@ local myawesomemenu = {
 awful.util.mymainmenu = freedesktop.menu.build({
     icon_size = beautiful.menu_height or 16,
     before = {
-        { "Awesome", myawesomemenu, beautiful.awesome_icon },
+        { "Awesome", myawesomemenu, awesome_icon },
         -- other triads can be put here
     },
     after = {
@@ -119,7 +121,7 @@ awful.util.tasklist_buttons = my_table.join(
 )
 
 
-beautiful.init(string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme))
+beautiful.init(string.format("%s/theme.lua", theme_path))
 
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", function(s)
