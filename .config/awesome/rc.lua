@@ -448,10 +448,6 @@ clientkeys = my_table.join(
 		function(c)
 			c:swap(awful.client.getmaster())
 		end, {description = "move to master", group = "client"}),
-	awful.key({modkey}, "o",
-		function(c)
-			c.ontop = not c.ontop
-		end, {description = "always-on-top client", group = "client"}),
 	awful.key({modkey, "Control"}, "o",
 		function(c)
 			c:move_to_screen()
@@ -490,19 +486,35 @@ clientkeys = my_table.join(
 		end, {description = "Floating Resize Horizontal +", group = "client"}),
 	awful.key({modkey, "Shift"}, "Down",
 		function(c)
-			c:relative_move(0, 20, 0, 0)
+			if c.floating then
+				c:relative_move(0, 20, 0, 0)
+			else
+				awful.client.swap.byidx(1)
+			end
 		end, {description = "Floating Move Down", group = "client"}),
 	awful.key({modkey, "Shift"}, "Up",
 		function(c)
-			c:relative_move(0, -20, 0, 0)
+			if c.floating then
+				c:relative_move(0, -20, 0, 0)
+			else
+				awful.client.swap.byidx(-1)
+			end
 		end, {description = "Floating Move Up", group = "client"}),
 	awful.key({modkey, "Shift"}, "Left",
 		function(c)
-			c:relative_move(-20, 0, 0, 0)
+			if c.floating then
+				c:relative_move(-20, 0, 0, 0)
+			else
+				awful.client.swap.byidx(-1)
+			end
 		end, {description = "Floating Move Left", group = "client"}),
 	awful.key({modkey, "Shift"}, "Right",
 		function(c)
-			c:relative_move(20, 0, 0, 0)
+			if c.floating then
+				c:relative_move(20, 0, 0, 0)
+			else
+				awful.client.swap.byidx(1)
+			end
 		end, {description = "Floating Move Right", group = "client"})
 )
 -- Bind all key numbers to tags.
