@@ -180,7 +180,7 @@
 #Equalizer_SaveState = yes
 
 # Show files with dot at the beginning?
-ShowHiddenFiles = no
+ShowHiddenFiles = yes
 
 # Hide file name extensions?
 #HideFileExtension = no
