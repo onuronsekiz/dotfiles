@@ -63,8 +63,8 @@ theme.removable_default_unmounted = theme.dir .. "/icons/removable_default_unmou
 theme.removable_usb_mounted       = theme.dir .. "/icons/removable_usb_mounted.png"
 theme.removable_usb_unmounted     = theme.dir .. "/icons/removable_usb_unmounted.png"
 
-theme.taglist_squares_sel = theme.dir .. "/icons/squarew.png"
-theme.taglist_squares_unsel = theme.dir .. "/icons/squarew.png"
+theme.taglist_squares_sel = theme.dir .. "/icons/square.png"
+theme.taglist_squares_unsel = theme.dir .. "/icons/square.png"
 
 --}}}
 
