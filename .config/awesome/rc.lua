@@ -43,14 +43,14 @@ end
 local webbrowser = "firefox"
 local filebrowser = "pcmanfm-qt"
 local terminal = "alacritty"
-local editor = "vim"
 local themes = {"notheme"}
+local editor = "vim"
 local chosen_theme = themes[1]
 local modkey = "Mod4"
 local altkey = "Mod1"
 local vi_focus = false
-local cycle_prev = true
-local theme_path = os.getenv("HOME") .. "/.config/awesome/themes/" .. chosen_theme
+local cycle_prev = true 
+local theme_path = os.getenv("HOME") .. "/.config/awesome/themes/" .. chosen_theme 
 local awesome_icon = theme_path .. "/icons/awesome16.png"
 
 awful.layout.layouts = {
@@ -109,8 +109,6 @@ awful.util.tasklist_buttons = my_table.join(
 				if not c:isvisible() and c.first_tag then
 					c.first_tag:view_only()
 				end
-				-- This will also un-minimize
-				-- the client, if needed
 				client.focus = c
 				c:raise()
 			end
@@ -138,7 +136,7 @@ end)
 
 -- Create a wibox for each screen and add it
 awful.screen.connect_for_each_screen(function(s)
-	s.quake = lain.util.quake({ app = terminal, argname = "--title %s", extra = "--class QuakeDD", visible = true, horiz = "center", height = 0.3, width = 0.75 })
+	s.quake = lain.util.quake({ app = terminal, argname = "--title %s", extra = "--class QuakeDD", visible = true, horiz = "center", height = 0.3, width = 0.75 }) --argname = "--title %s",
 	beautiful.at_screen_connect(s)
 			local virtual_keyboard = require("widgets.virtual_keyboard-widget.virtual_keyboard")
 			s.virtual_keyboard = virtual_keyboard:new({ screen = s } )
@@ -153,7 +151,6 @@ root.buttons(gears.table.join(
 -- }}}
 
 --{{{ Layout change notification
-
 local tagpopup = awful.popup {
 	widget = {},
 	placement = awful.placement.centered,
@@ -164,6 +161,7 @@ local tagpopup = awful.popup {
 	margins = 4,
 	shape = gears.shape.rounded_rect,
 	opacity = 0.95,
+	--offset = { y = 8 },	
 }	
 
 local function call_layout_info ()
@@ -201,10 +199,10 @@ local function call_layout_info ()
 	}
 end
 
--- {{{ Move client to same tag across screens
+--{{{ Move client to same tag across screens
 local function move_client_to_screen (c,s)
 	local index = c.first_tag.index
-	c:move_to_screen()
+	c:move_to_screen(s)
 	local tag = c.screen.tags[index]
 	c:move_to_tag(tag)
 	if tag then tag:view_only() end
@@ -312,6 +310,7 @@ globalkeys = my_table.join(
 		end, {description = "toggle wibox", group = "awesome"}),
 	awful.key({modkey}, "t",
 		function()
+			--lain.util.rename_tag()
 			local traywidget = wibox.widget.systray()
 			traywidget:set_screen(awful.screen.focused())
 		end, {description = "move systray to screen", group = "awesome"}),
@@ -407,7 +406,7 @@ globalkeys = my_table.join(
 			awful.screen.focused().mypromptbox:run()
 		end, {description = "execute command", group = "awesome"})
 )
-			
+
 clientkeys = my_table.join(
 	awful.key({modkey,altkey}, "Up",
 		function (c)
@@ -448,6 +447,10 @@ clientkeys = my_table.join(
 		function(c)
 			c:swap(awful.client.getmaster())
 		end, {description = "move to master", group = "client"}),
+	awful.key({modkey}, "o",
+		function(c)
+			c.ontop = not c.ontop
+		end, {description = "always-on-top client", group = "client"}),
 	awful.key({modkey, "Control"}, "o",
 		function(c)
 			c:move_to_screen()
@@ -531,7 +534,7 @@ for i = 1, 9 do
 				tag:view_only()
 			end
 		end, {description = "view tag #"..i, group = "tag"}),
-	-- move client to tag.
+	-- move client to tags
 	awful.key({ modkey, altkey }, "#" .. i + 9,
 		function ()
 			local screen = awful.screen.focused()
@@ -550,6 +553,7 @@ clientbuttons = gears.table.join(
 		function(c)
 			c:emit_signal("request::activate", "mouse_click", {raise = true})
 		end),
+	awful.button({modkey, altkey}, 1, awful.client.movetotag),
 	awful.button({modkey}, 1,
 		function(c)
 			c:emit_signal("request::activate", "mouse_click", {raise = true})
@@ -596,25 +600,25 @@ awful.rules.rules = {
 			class = {
 				"Arandr", "Nautilus", "Gnome-calculator", "feh", "Blueman-manager", "Gpick", "Kruler", "MessageWin", -- kalarm.
 				"Sxiv", "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
-				"Wpa_gui", "veromix", "xtightvncviewer", "xvkbd"},
+				"Wpa_gui", "veromix", "xtightvncviewer",
+				"xvkbd"},
 			-- Note that the name property shown in xprop might be set slightly after creation of the client
 			-- and the name shown there might not match defined rules here.
 			name = {"Event Tester", -- xev.
-				"xvkbd - Virtual Keyboard"},
+				"xvkbd - Virtual Keyboard"
+				},
 			role = {"AlarmWindow", -- Thunderbird's calendar.
 					"ConfigManager", -- Thunderbird's about:config.
 					"pop-up", -- e.g. Google Chrome's (detached) Developer Tools.
 				}},
 		properties = {floating = false}},
 	{rule_any = {type = {"dialog", "normal"}}, properties = {titlebars_enabled = false}},
-	--{rule_any = {type = {"dialog"}}, properties = {titlebars_enabled = true, ontop = true}},
-	--{rule = {class = "Gimp", role = "gimp-image-window"}, properties = {maximized = true}},
-	{rule = {class = "Notepadqq", name = "Search"}, properties = {ontop = true, titlebars_enabled = true }}
+	{rule = {class = "Notepadqq", name = "Search"}, properties = {ontop = true}},
 	{rule = {class = "Mate-calc", name = "Calculator"}, properties = {ontop = true}},
 	{rule = {class = "CMST - Connman System Tray", name = "Connman System Tray"}, properties = {ontop = true}},
 	{rule = {class = "Lxrandr", name = "Display Settings"}, properties = {ontop = true}},
-	-- Set Firefox to always map on the tag named "2" on screen 1.
-	-- { rule = { class = "Firefox" }, properties = { screen = 1, tag = "2" } },
+		-- Set Firefox to always map on the tag named "2" on screen 1.
+		-- { rule = { class = "Firefox" }, properties = { screen = 1, tag = "2" } },
 }
 
 
@@ -636,6 +640,7 @@ client.connect_signal("manage",
 	end
 )
 
+
 -- Enable sloppy focus, so that focus follows mouse.
 client.connect_signal("mouse::enter",
 	function(c)
@@ -645,7 +650,7 @@ client.connect_signal("mouse::enter",
 client.connect_signal("focus",
 	function(c)
 		c.border_color = beautiful.border_focus
-	end
+ 	end
 )
 client.connect_signal("unfocus",
 	function(c)
