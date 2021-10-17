@@ -22,7 +22,7 @@ Requirements
 Other requirements like terminal, browser, filemanager can be changed through `rc.lua` and `theme.lua` according to your taste.
 DON'T FORGET TO CHANGE `loadkeys` language in `.xprofile` according to your language.
 
-![2021-10-11_01-22](https://user-images.githubusercontent.com/76511536/136715002-1e41b69c-f634-48dd-b2c6-a4cbf2688385.png)
+![2021-10-17_22-56](https://user-images.githubusercontent.com/76511536/137647779-a87cea0f-234b-4dbc-b433-4e7edd873845.png)
 
 ![2021-10-11_03-46](https://user-images.githubusercontent.com/76511536/136719105-a091e9e1-4cea-4d01-afd4-76cfa61f9b0b.png)
 
