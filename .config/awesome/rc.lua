@@ -135,12 +135,7 @@ screen.connect_signal("property::geometry", function(s)
 end)
 
 -- Create a wibox for each screen and add it
-awful.screen.connect_for_each_screen(function(s)
-	s.quake = lain.util.quake({ app = terminal, argname = "--title %s", extra = "--class QuakeDD", visible = true, horiz = "center", height = 0.3, width = 0.75 }) --argname = "--title %s",
-	beautiful.at_screen_connect(s)
-			local virtual_keyboard = require("widgets.virtual_keyboard-widget.virtual_keyboard")
-			s.virtual_keyboard = virtual_keyboard:new({ screen = s } )
-end)
+awful.screen.connect_for_each_screen(function(s) beautiful.at_screen_connect(s) end)
 
 -- {{{ Mouse bindings
 root.buttons(gears.table.join(
