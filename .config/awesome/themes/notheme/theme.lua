@@ -372,14 +372,17 @@ local slspr = wibox.widget.textbox(' ')
 
 --{{{ create wibar functions for all screens
 function theme.at_screen_connect(s)
+	-- Quake terminal
+	s.quake = lain.util.quake({ app = terminal, argname = "--title %s", extra = "--class QuakeDD", visible = true, horiz = "center", height = 0.3, width = 0.75 })
+	-- Virtual keyboard
+	local virtual_keyboard = require("widgets.virtual_keyboard-widget.virtual_keyboard")
+	s.virtual_keyboard = virtual_keyboard:new({ screen = s } )
+	-- Set wallpaper
 	gears.wallpaper.maximized(theme.wallpaper, s)
-	
 	-- Tags
 	awful.tag(awful.util.tagnames, s, awful.layout.suit.tile ) 
-	
 	-- Create a promptbox for each screen
 	s.mypromptbox = awful.widget.prompt()
-	
 	-- Create a taglist widget
 	s.mytaglist = awful.widget.taglist {
 		screen = s,
