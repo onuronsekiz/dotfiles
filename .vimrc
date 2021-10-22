@@ -23,6 +23,7 @@ let g:currentmode={
 set title
 syntax on
 highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
+set tabstop=4
 set number
 set hlsearch
 set laststatus=2
