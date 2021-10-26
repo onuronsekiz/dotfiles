@@ -383,7 +383,7 @@ function theme.at_screen_connect(s)
 	-- Tags
 	awful.tag(awful.util.tagnames, s, awful.layout.suit.tile ) 
 	-- Create a promptbox for each screen
-	s.mypromptbox = awful.widget.prompt()
+	s.mypromptbox = awful.widget.prompt{prompt='<b>Run: </b>',fg='#BC3D39',bg_cursor='#BC3D39'}
 	-- Create a taglist widget
 	s.mytaglist = awful.widget.taglist {
 		screen = s,
