@@ -12,7 +12,8 @@ local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 local theme = {}
 
 theme.dir = os.getenv("HOME") .. "/.config/awesome/themes/notheme"
-theme.wallpaper = theme.dir .. "/void-wallpaper.png"
+--theme.wallpaper = theme.dir .. "/void-wallpaper.png"
+theme.wallpaper = theme.dir .. "/cthulhu-wallpaper.png"
 theme.font = "Dejavu Sans 9"
 theme.mono_font = "Liberation Mono 10"
 theme.opacity_normal = 0.95
