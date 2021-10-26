@@ -22,7 +22,7 @@ let g:currentmode={
 
 set title
 syntax on
-set listchars=eol:¬,tab:→\ \ ,space:·,nbsp:␣,trail:•,extends:»,precedes:«
+set listchars=eol:¬,tab:⊳\ ,space:·,nbsp:␣,trail:•,extends:»,precedes:«
 highlight NonText ctermfg=DarkGrey guifg=DarkGrey
 highlight SpecialKey ctermfg=DarkGrey guifg=DarkGrey
 highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
@@ -48,7 +48,7 @@ set statusline+=%1*\ ln:\ %02l/%L\ (%3p%%)\              " Line number / total l
 set statusline+=%0*\ %{toupper(g:currentmode[mode()])}\  " The current mode
 
 
-hi User1 ctermfg=007 ctermbg=239 guibg=#4e4e4e guifg=#adadad 
+hi User1 ctermfg=007 ctermbg=239 guibg=#4e4e4e guifg=#adadad
 hi User2 ctermfg=007 ctermbg=236 guibg=#303030 guifg=#adadad
 hi User3 ctermfg=236 ctermbg=236 guibg=#303030 guifg=#303030
 hi User4 ctermfg=239 ctermbg=239 guibg=#4e4e4e guifg=#4e4e4e
