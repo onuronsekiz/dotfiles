@@ -654,5 +654,5 @@ client.connect_signal("unfocus",
 )
 
 os.execute("picom -b --config ~/.config/picom/picom.conf --xrender-sync-fence --experimental-backends")
-os.execute("pulsemixer &")
+os.execute("pactl info &")
 os.execute("cmst -m &")
