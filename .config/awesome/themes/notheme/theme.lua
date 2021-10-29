@@ -148,7 +148,7 @@ local fs_tooltip = awful.tooltip {
 	margins_topbottom = 6,
 	margins_leftright = 10,
 	timer_function = function()
-		local cmd = [[df -h]]
+		local cmd = [[df -h | grep -v 'tmp\|sys']]
 		awful.spawn.easy_async_with_shell(cmd, function(result) fs_tooltip_text = result end)
 		fs_tooltip_text = string.format("%s", fs_tooltip_text):gsub("\n[^\n]*$", "")
 		if fs_tooltip_text == "nil" then
