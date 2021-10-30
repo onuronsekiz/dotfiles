@@ -260,7 +260,7 @@ local vol_tooltip = awful.tooltip {
 	margins_topbottom = 6,
 	margins_leftright = 10,
 	timer_function = function()
-		local cmd = [[pacmd list-sinks | sed -n -e '/*/,$!d;' -e '/device.description/ {s/.*"\(.*\)"[^"]*$/\1/;p;q;}' && pacmd list-sources | sed -n -e '/*/,$!d;' -e '/device.description/ {s/.*"\(.*\)"[^"]*$/\1/;p;q;}']]
+		local cmd = [[pacmd list-sinks | sed -n -e '/*/,$!d;' -e '/s/Built-in\ Audio\ //g' -e '/device.description/ {s/.*"\(.*\)"[^"]*$/\1/;p;q;}' && pacmd list-sources | sed -n -e '/*/,$!d;' -e '/device.description/ {s/.*"\(.*\)"[^"]*$/\1/;p;q;}']]
 		awful.spawn.easy_async_with_shell(cmd, function(result) vol_tooltip_text = result end)
 		vol_tooltip_text = string.format("%s\n\n%s", "<b>Audio sources</b>", vol_tooltip_text):gsub("\n[^\n]*$", "")
 	return vol_tooltip_text
