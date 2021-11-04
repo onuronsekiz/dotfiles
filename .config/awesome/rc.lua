@@ -320,7 +320,7 @@ globalkeys = my_table.join(
 	awful.key({modkey}, "c",
 		function()
 			awful.util.spawn(terminal)
-		end, {description = "open a terminal", group = "launcher"}),
+		end, {description = "open terminal", group = "hotkeys"}),
 	awful.key({modkey, "Control"}, "r",
 		awesome.restart,
 		{description = "reload awesome", group = "awesome"}),
