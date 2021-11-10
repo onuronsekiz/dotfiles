@@ -20,12 +20,16 @@ let g:currentmode={
     \ 't'  : 'Terminal'
     \}
 
-set title
+set background=dark
+hi clear
 syntax on
-set listchars=eol:¬,tab:⊳\ ,space:·,nbsp:␣,trail:•,extends:»,precedes:«
+
 highlight NonText ctermfg=DarkGrey guifg=DarkGrey
 highlight SpecialKey ctermfg=DarkGrey guifg=DarkGrey
 highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
+hi Comment cterm=italic ctermfg=239 ctermbg=NONE guifg=DarkGrey
+
+set title
 set number
 set tabstop=4
 set noexpandtab
@@ -46,7 +50,7 @@ set statusline+=%2*\ col:\ %02v\                         " Column number
 set statusline+=%3*│                                     " Separator
 set statusline+=%1*\ ln:\ %02l/%L\ (%3p%%)\              " Line number / total lines, percentage of document
 set statusline+=%0*\ %{toupper(g:currentmode[mode()])}\  " The current mode
-
+set listchars=eol:¬,tab:⊳\ ,space:·,nbsp:␣,trail:•,extends:»,precedes:«
 
 hi User1 ctermfg=007 ctermbg=239 guibg=#4e4e4e guifg=#adadad
 hi User2 ctermfg=007 ctermbg=236 guibg=#303030 guifg=#adadad
