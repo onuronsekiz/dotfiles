@@ -365,6 +365,20 @@ moc_tooltip = awful.tooltip{
 	end,
 }
 
+-- Virtual Keyboard
+local vkeybicon = wibox.widget.textbox('')
+local vkeyb_tooltip = awful.tooltip {
+	objects = { vkeybicon },
+	margins_topbottom = 6,
+	margins_leftright = 10,
+	markup = "<b>Virtual keyboard</b>\n\nClick to enable"
+}
+
+vkeybicon:buttons(my_table.join(awful.button({}, 1,
+function ()
+	os.execute("xdotool keydown super key z keyup super")
+end)))
+
 -- Separators
 local spr = wibox.widget.textbox('   ')
 local slspr = wibox.widget.textbox(' ')
@@ -482,6 +496,9 @@ function theme.at_screen_connect(s)
 			slspr,
 			udisks.widget,
 			slspr,
+			vkeybicon,
+			keyboardlayout,
+			slspr;
 			s.mypromptbox,
 			slspr,
 		},
