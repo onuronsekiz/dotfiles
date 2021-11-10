@@ -21,7 +21,6 @@ let g:currentmode={
     \}
 
 set background=dark
-hi clear
 syntax on
 
 highlight NonText ctermfg=DarkGrey guifg=DarkGrey
