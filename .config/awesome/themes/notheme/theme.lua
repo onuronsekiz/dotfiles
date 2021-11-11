@@ -365,19 +365,37 @@ moc_tooltip = awful.tooltip{
 	end,
 }
 
--- Virtual Keyboard
-local vkeybicon = wibox.widget.textbox('')
-local vkeyb_tooltip = awful.tooltip {
-	objects = { vkeybicon },
-	margins_topbottom = 6,
-	margins_leftright = 10,
-	markup = "<b>Virtual keyboard</b>\n\nClick to enable"
+-- Virtual Keyboard and Layout
+local keyboardwidget = wibox.widget{
+	{	
+		{
+			{
+				font = theme.taglist_font,
+				widget = wibox.widget.textbox('î¥'),
+			},
+			{
+				widget = keyboardlayout,
+			},
+			spacing= -4,
+			layout = wibox.layout.fixed.horizontal
+		},
+		margins = 0,
+		layout = wibox.container.margin
+	},
+	widget = wibox.container.background	
 }
 
-vkeybicon:buttons(my_table.join(awful.button({}, 1,
+keyboardwidget:buttons(my_table.join(awful.button({}, 1,
 function ()
 	os.execute("xdotool keydown super key z keyup super")
 end)))
+
+local keyboardwidget_tooltip = awful.tooltip {
+	objects = { keyboardwidget },
+	margins_topbottom = 6,
+	margins_leftright = 10,
+	markup = "<b>Virtual keyboard</b>\n\nClick to enable",
+}
 
 -- Separators
 local spr = wibox.widget.textbox('   ')
@@ -532,6 +550,8 @@ function theme.at_screen_connect(s)
 					widget = wibox.widget.systray(),
 				},
 				spacing = 0, layout = wibox.layout.fixed.horizontal}, margins = 1, layout = wibox.container.margin}, widget = wibox.container.background}, 0,0,4,3),
+			slspr,
+			wibox.layout.margin(keyboardwidget, 0, 0, 0, 0),
 			clock,
 			slspr,
 			wibox.layout.margin(logout_menu_widget(),0,-1,-1,0),
