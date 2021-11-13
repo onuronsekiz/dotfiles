@@ -373,10 +373,10 @@ local keyboardwidget = wibox.widget{
 				font = theme.taglist_font,
 				widget = wibox.widget.textbox('î¥'),
 			},
-			{
-				widget = keyboardlayout,
-			},
-			spacing= -4,
+			--{
+			--	widget = keyboardlayout,
+			--},
+			--spacing= -4,
 			layout = wibox.layout.fixed.horizontal
 		},
 		margins = 0,
@@ -514,8 +514,7 @@ function theme.at_screen_connect(s)
 			slspr,
 			udisks.widget,
 			slspr,
-			vkeybicon,
-			keyboardlayout,
+			wibox.layout.margin(keyboardwidget, 0, 0, 0, 0),
 			slspr;
 			s.mypromptbox,
 			slspr,
@@ -550,8 +549,6 @@ function theme.at_screen_connect(s)
 					widget = wibox.widget.systray(),
 				},
 				spacing = 0, layout = wibox.layout.fixed.horizontal}, margins = 1, layout = wibox.container.margin}, widget = wibox.container.background}, 0,0,4,3),
-			slspr,
-			wibox.layout.margin(keyboardwidget, 0, 0, 0, 0),
 			clock,
 			slspr,
 			wibox.layout.margin(logout_menu_widget(),0,-1,-1,0),
