@@ -397,6 +397,10 @@ local keyboardwidget_tooltip = awful.tooltip {
 	markup = "<b>Virtual keyboard</b>\n\nClick to enable",
 }
 
+--System Tray
+local systemtray = wibox.widget.systray()
+systemtray:set_base_size(12)
+
 -- Separators
 local spr = wibox.widget.textbox('   ')
 local slspr = wibox.widget.textbox(' ')
@@ -546,9 +550,9 @@ function theme.at_screen_connect(s)
 			layout = wibox.layout.fixed.horizontal,
 			wibox.layout.margin(wibox.widget {{{
 				{
-					widget = wibox.widget.systray(),
+					widget = systemtray,
 				},
-				spacing = 0, layout = wibox.layout.fixed.horizontal}, margins = 1, layout = wibox.container.margin}, widget = wibox.container.background}, 0,0,4,3),
+				spacing = 0, layout = wibox.layout.fixed.horizontal}, margins = 1, layout = wibox.container.margin}, widget = wibox.container.background}, 0,0,5,3),
 			clock,
 			slspr,
 			wibox.layout.margin(logout_menu_widget(),0,-1,-1,0),
