@@ -397,7 +397,7 @@ local keyboardwidget_tooltip = awful.tooltip {
 	markup = "<b>Virtual keyboard</b>\n\nClick to enable",
 }
 
---System Tray
+-- System Tray
 local systemtray = wibox.widget.systray()
 systemtray:set_base_size(12)
 
@@ -518,7 +518,7 @@ function theme.at_screen_connect(s)
 			slspr,
 			udisks.widget,
 			slspr,
-			wibox.layout.margin(keyboardwidget, 0, 0, 0, 0),
+			wibox.layout.margin(keyboardwidget, 0, 0, 1, 0),
 			slspr;
 			s.mypromptbox,
 			slspr,
