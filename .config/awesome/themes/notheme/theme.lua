@@ -548,11 +548,7 @@ function theme.at_screen_connect(s)
 			wibox.layout.margin(musicwidget,1,0,-1,0),
 			slspr,
 			layout = wibox.layout.fixed.horizontal,
-			wibox.layout.margin(wibox.widget {{{
-				{
-					widget = systemtray,
-				},
-				spacing = 0, layout = wibox.layout.fixed.horizontal}, margins = 1, layout = wibox.container.margin}, widget = wibox.container.background}, 0,0,5,3),
+			wibox.layout.margin(systemtray,0,0,5,3),
 			clock,
 			slspr,
 			wibox.layout.margin(logout_menu_widget(),0,-1,-1,0),
