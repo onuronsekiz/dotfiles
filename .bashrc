@@ -5,5 +5,5 @@
 
 alias ls='ls -h --group-directories-first --color=auto'
 #PS1='[\u@\h \W]\$ '
-PS1='\e[0m[\e[32;1m\u@\h: \e[34m\W\e[0m]\$ '
+PS1='\e[0m[\e[32\u@\h: \e[34;1m\W\e[0m]\$ '
 PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND; }'printf "\033]0;[%s@%s]$ %s\007" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/\~}"'
