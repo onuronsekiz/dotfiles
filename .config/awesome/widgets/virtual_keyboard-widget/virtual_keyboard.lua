@@ -263,7 +263,7 @@ function module:new(config)
 						module.button({
 								name = "Shift",
 								size = 2.25,
-								keycode = "Shift_Lock",
+								keycode = "keydown Shift_L sleep 2 keyup Shift_L",
 								fg = mod_fg_color, bg = mod_bg_color,
 							}),
 						module.button({ name = "z" }),
@@ -303,19 +303,19 @@ function module:new(config)
 						spacing = 0,
 						module.button({
 								name = "Ctrl",
-								keycode = "Control_L",
+								keycode = "keydown Control_L sleep 2 keyup Control_L",
 								size = 1.25,
 								fg = mod_fg_color, bg = mod_bg_color,
 							}),
 						module.button({
 								name = "Win",
-								keycode = "Super_L",
+								keycode = "keydown Super_L sleep 2 keyup Super_L",
 								size = 1.25,
 								fg = mod_fg_color, bg = mod_bg_color,
 							}),
 						module.button({
 								name = "Alt",
-								keycode = "Alt_L",
+								keycode = "keydown Alt_L sleep 2 keyup Alt_L",
 								size = 1.25,
 								fg = mod_fg_color, bg = mod_bg_color,
 							}),
@@ -344,7 +344,7 @@ function module:new(config)
 							}),
 						module.button({
 								name = "Ctrl",
-								keycode = "Ctrl_R",
+								keycode = "keydown Control_R sleep 2 keyup Control_R",
 								size = 1.25,
 								fg = mod_fg_color, bg = mod_bg_color,
 							}),
