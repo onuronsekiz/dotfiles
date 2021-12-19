@@ -430,6 +430,10 @@ clientkeys = my_table.join(
 			c.fullscreen = not c.fullscreen
 			c:raise()
 		end, {description = "toggle fullscreen", group = "client"}),
+	awful.key({modkey}, "p",
+		function(c)
+			c.sticky = not c.sticky
+		end, {description = "toggle client sticky", group = "client"}),	
 	awful.key({modkey}, "q",
 		function(c)
 			c:kill()
