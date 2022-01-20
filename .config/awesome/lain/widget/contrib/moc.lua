@@ -57,7 +57,7 @@ local function factory(args)
                 end
             end
 
-            moc_notification_preset.text = string.format("%s (%s)\n%s\n[%s/%s]", moc_now.artist,
+	moc_notification_preset.text = string.format("<b>Artist:</b> %s\n<b>Album:</b> %s\n<b>Title:</b> %s\n[%s/%s]", moc_now.artist,
                                            moc_now.album, moc_now.title, moc_now.elapsed, moc_now.total)
             widget = moc.widget
             settings()
