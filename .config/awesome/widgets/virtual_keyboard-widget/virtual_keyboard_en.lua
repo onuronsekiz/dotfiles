@@ -35,7 +35,7 @@ function module.button(attributes)
 	attr.fg = attr.fg or "#A1BFCF"
 	attr.spacing = attr.spacing or dpi(3)
 	local textbox = wibox.widget.textbox(attr.name)
-	textbox.font = "Liberation Mono 10"
+	textbox.font = "Liberation Mono 12"
 	local box = wibox.widget.base.make_widget_declarative({
 			{
 				{
@@ -117,58 +117,27 @@ function module:new(config)
 						orientation = "horizontal",
 						horizontal_expand = false,
 						homogeneous = false,
-						spacing = 0,
+						spacing = 7,
 						forced_height = key_size,
 						module.button({
 								name = "Esc",
-								size = 1.5,
+								size = 1.25,
 								keycode = "Escape",
 								fg = accent_fg_color,
 								bg = accent_bg_color,
-							}),
-						module.button({
-								name = "",
-								size = 0.5,
 							}),
 						module.button({ name = "F1" }),
 						module.button({ name = "F2" }),
 						module.button({ name = "F3" }),
 						module.button({ name = "F4" }),
-						module.button({
-								name = "",
-								size = 0.5,
-							}),
 						module.button({ name = "F5" }),
 						module.button({ name = "F6" }),
 						module.button({ name = "F7" }),
 						module.button({ name = "F8" }),
-						module.button({
-								name = "",
-								size = 0.5,
-							}),
 						module.button({ name = "F9" }),
 						module.button({ name = "F10" }),
 						module.button({ name = "F11" }),
 						module.button({ name = "F12" }),
-						module.button({
-								name = "",
-								size = 0.25,
-							}),
-						module.button({
-								name = "Prt\nScr",
-								size = 1,
-								keycode = "Print",
-							}),
-						module.button({
-								name = "Scrl\nLock",
-								size = 1,
-								keycode = "Scroll_Lock",
-							}),
-						module.button({
-								name = "Pause\nBreak",
-								size = 1,
-								keycode = "Pause",
-							}),
 					},
 					{ layout = wibox.layout.fixed.horizontal }
 				},
@@ -209,16 +178,16 @@ function module:new(config)
 								keycode = "BackSpace",
 								fg = mod_fg_color, bg = mod_bg_color,
 							}),
-						module.button({
-						    name = "",
-						    size = 0.25
-						}),
-						module.button({ name = "Ins" }),
-						module.button({ name = "Home" }),
-						module.button({
-						    name = "PUp",
-						    keycode = "Page_Up"
-						})
+						-- module.button({
+						--     name = "",
+						--     size = 0.25
+						-- }),
+						-- module.button({ name = "Insert" }),
+						-- module.button({ name = "Home" }),
+						-- module.button({
+						--     name = "PageUp",
+						--     keycode = "Page_Up"
+						-- })
 						--
 						--
 					},
@@ -259,20 +228,19 @@ function module:new(config)
 								name = "Num\nLock",
 								size = 1.25,
 								keycode = "Num_Lock",
-								fg = mod_fg_color, bg = mod_bg_color,
-								--fg = accent_fg_color,
-								--bg = accent_bg_color,
+								fg = accent_fg_color,
+								bg = accent_bg_color,
 							}),
-						 module.button({
-						     name = "",
-						     size = 0.25
-						 }),
-						 module.button({ name = "Del" }),
-						 module.button({ name = "End" }),
-						 module.button({
-						     name = "PDown",
-						     keycode = "Page_Down"
-						 })
+						-- module.button({
+						--     name = "",
+						--     size = 0.25
+						-- }),
+						-- module.button({ name = "Delete" }),
+						-- module.button({ name = "End" }),
+						-- module.button({
+						--     name = "PageDown",
+						--     keycode = "Page_Down"
+						-- })
 					},
 					{ layout = wibox.layout.fixed.horizontal }
 				},
@@ -314,13 +282,13 @@ function module:new(config)
 								fg = accent_fg_color,
 								bg = accent_bg_color,
 							}),
-						 module.button({
-						     name = "",
-						     size = 0.25
-						 }),
-						 module.button({ name = "" }),
-						 module.button({ name = "" }),
-						 module.button({ name = "" })
+						-- module.button({
+						--     name = "",
+						--     size = 0.25
+						-- }),
+						-- module.button({ name = "" }),
+						-- module.button({ name = "" }),
+						-- module.button({ name = "" })
 					},
 					{ layout = wibox.layout.fixed.horizontal }
 				},
@@ -336,7 +304,7 @@ function module:new(config)
 						spacing = 0,
 						module.button({
 								name = "Shift",
-								size = 1.75,
+								size = 1.25,
 								keycode = "keydown Shift_L sleep 2 keyup Shift_L",
 								fg = mod_fg_color, bg = mod_bg_color,
 							}),
@@ -356,17 +324,17 @@ function module:new(config)
 						--module.button({ name = "/", keycode = "slash" }),
 						module.button({
 								name = "Shift",
-								size = 2.25,
+								size = 2.75,
 								keycode = "keydown Shift_R sleep 2 keyup Shift_R",
 								fg = mod_fg_color, bg = mod_bg_color,
 							}),
-						 module.button({
-						     name = "",
-						     size = 0.25
-						 }),
-						 module.button({ name = "" }),
-						 module.button({ name = "Up" }),
-						 module.button({ name = "" })
+						-- module.button({
+						--     name = "",
+						--     size = 0.25
+						-- }),
+						-- module.button({ name = "" }),
+						-- module.button({ name = "Up" }),
+						-- module.button({ name = "" })
 					},
 					{ layout = wibox.layout.fixed.horizontal }
 				},
@@ -427,13 +395,13 @@ function module:new(config)
 								size = 1.75,
 								fg = mod_fg_color, bg = mod_bg_color,
 							}),
-						 module.button({
-						     name = "",
-						     size = 0.25
-						 }),
-						 module.button({ name = "Left" }),
-						 module.button({ name = "Down" }),
-						 module.button({ name = "Right" })
+						-- module.button({
+						--     name = "",
+						--     size = 0.25
+						-- }),
+						-- module.button({ name = "Left" }),
+						-- module.button({ name = "Down" }),
+						-- module.button({ name = "Right" })
 					},
 					{ layout = wibox.layout.fixed.horizontal }
 				}
