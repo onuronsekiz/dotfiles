@@ -1,0 +1,6 @@
+ACTION!="add|change", GOTO="logitech_end"
+
+# Logitech Unifying Receiver
+KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c52b", TAG+="uaccess"
+
+LABEL="logitech_end"
