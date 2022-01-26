@@ -234,6 +234,7 @@ local function scan_finished(devices)
 					fg = beautiful.fg_normal,
 					opacity = beautiful.opacity_normal,
 					shape = gears.shape.rounded_rect,
+					align = "bottom",
 					margins_leftright = 10,
 					margins_topbottom = 6,
 					markup = string.format("%s\n/dev/%s\n%s%s (%s)%s",data.Name, data.Device, data.MountedPath, data.Size, data.FS, data.Label),
