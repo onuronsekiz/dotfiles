@@ -214,16 +214,20 @@ globalkeys = my_table.join(
 		end, {description = "Virtual Keyboard", group = "hotkeys"}),
 	awful.key({}, "Print",
 		function()
-			os.execute("flameshot full -p ~/Pictures/")
+			os.execute("flameshot full -p Pictures/")
 		end, {description = "Print Screen to File", group = "hotkeys"}),
 	awful.key({altkey}, "Print",
 		function()
-			os.execute("flameshot gui -p ~/Pictures/")
+			os.execute("flameshot gui -p Pictures/")
 		end, {description = "Print Screen Select", group = "hotkeys"}),
 	awful.key({"Control"}, "Print",
 		function()
 			os.execute("flameshot full -c")
 		end, {description = "Print Screen to Clipboard", group = "hotkeys"}),
+	awful.key({"Control", modkey}, "Print",
+		function()
+			awful.spawn("flameshot full -d 2000 -p Pictures/")
+		end, {description = "Print Screen with 2s Delay", group = "hotkeys"}),
 	awful.key({}, "XF86AudioPlay",
 		function() 
 			os.execute("mocp -G")
