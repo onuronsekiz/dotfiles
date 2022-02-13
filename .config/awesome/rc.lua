@@ -162,7 +162,8 @@ local tagpopup = awful.popup {
 local function call_layout_info ()
 	markup_text = "Layout = " .. awful.layout.getname(awful.layout.get(mouse.screen)) .. "\n" .. 
 				"Master = " .. mouse.screen.selected_tag.master_count .. "\n" .. 
-				"Column = " .. mouse.screen.selected_tag.column_count
+				"Column = " .. mouse.screen.selected_tag.column_count .. "\n" ..
+				"Notify = " .. tostring(not naughty.is_suspended())
 	tagpopup.widget = wibox.widget {
 		{
 			{
@@ -208,6 +209,15 @@ end
 globalkeys = my_table.join(
 	awful.key({ modkey }, "h", hotkeys_popup.show_help, {description = "Show help", group="awesome"}),
 	awful.key({ modkey }, "a", function () awful.screen.focused().quake:toggle() end, {description = "dropdown terminal", group = "hotkeys"}),
+	awful.key({ modkey}, "y",
+		function()
+			naughty.toggle()
+			call_layout_info()
+		end, {description = "Toggle notifications", group = "hotkeys"}), 
+	awful.key({ modkey, "Control" }, "y",
+		function()
+			naughty.destroy_all_notifications()
+		end, {description = "Destroy notifications", group = "hotkeys"}),
 	awful.key({ modkey }, "z",
 		function()
 			awful.screen.focused().virtual_keyboard:toggle()
