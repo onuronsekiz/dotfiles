@@ -156,7 +156,6 @@ local tagpopup = awful.popup {
 	margins = 4,
 	shape = gears.shape.rounded_rect,
 	opacity = 0.95,
-	--offset = { y = 8 },	
 }	
 
 local function call_layout_info ()
@@ -630,6 +629,8 @@ awful.rules.rules = {
 	{rule = {class = "Mate-calc", name = "Calculator"}, properties = {ontop = true}},
 	{rule = {class = "CMST - Connman System Tray", name = "Connman System Tray"}, properties = {ontop = true}},
 	{rule = {class = "Lxrandr", name = "Display Settings"}, properties = {ontop = true}},
+	{rule = {class = "libreoffice*" }, properties = { floating = false, maximize = false, below = true }},
+    	{rule = {class = "org.inkscape.Inkscape", name = "*" }, properties = { floating = false, maximize = false, below = true }},
 		-- Set Firefox to always map on the tag named "2" on screen 1.
 		-- { rule = { class = "Firefox" }, properties = { screen = 1, tag = "2" } },
 }
