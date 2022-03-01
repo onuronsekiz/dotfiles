@@ -1,1 +1,0 @@
-KERNEL=="event*", ATTRS{idVendor}=="0079", ATTRS{idProduct}=="0006", MODE="0666"
