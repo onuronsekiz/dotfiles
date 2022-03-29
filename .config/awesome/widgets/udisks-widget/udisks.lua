@@ -10,10 +10,21 @@ local naughty   = require("naughty")
 local math = require("math")
 
 local system_bus = Gio.bus_get_sync(Gio.BusType.SYSTEM)
-
 local devices = {}
-local module = {};
-local devices_layout = wibox.layout.fixed.horizontal()
+local font = "icomoon-feather 9"
+
+local udisks_widget = wibox.widget {
+	{
+		{
+			resize = false,
+			widget = wibox.widget{markup = 'î¥', font = font, widget = wibox.widget.textbox},
+    	},
+    	margins = 4,
+		layout = wibox.container.margin
+	},
+	shape = gears.shape.circle,
+    widget = wibox.container.background,
+}
 
 local function convert_size( oSize ) -- convert size from bytes to human readable form.
 	if oSize > 1099511627776 then
@@ -35,9 +46,9 @@ local function isempty(s)
 end
 
 local function open_filemanger(device)
-	if module.filemanager == nil then
+	if udisks_filemanager == nil then
 	else
-		awful.util.spawn_with_shell(module.filemanager .. ' "' .. device.Mounted .. '"');
+		awful.util.spawn_with_shell(udisks_filemanager .. ' "' .. device.Mounted .. '"');
 	end
 end
 
@@ -191,16 +202,17 @@ local function rescan_devices(callback)
 	);
 end
 
-
 local function scan_finished(devices)
-	devices_layout:reset();
+	local rows = { layout = wibox.layout.fixed.vertical }
 	for device, data in pairs(devices) do
 		if data.Device and data.OK then
 			local bus_type = data.ConnectionBus;
 			local status = 'unmounted';
 			local icon_name = '';
+			local color = beautiful.border_focus
 			if data.Mounted then
 				status = 'mounted';
+				color = beautiful.fg_normal
 			end
 			if not bus_type then
 				bus_type = 'default';
@@ -210,13 +222,28 @@ local function scan_finished(devices)
 				bus_type = 'default'
 				icon_name = 'removable_' .. bus_type .. '_' .. status;
 			end
-			deviceicon = wibox.widget.imagebox();
-			deviceicon:set_image(beautiful[icon_name]);
-			deviceicon:buttons(awful.util.table.join(
-				awful.button({ }, 1, function () mount_device(data); end),
-				awful.button({ }, 3, function () unmount_device(data); end)
-			))
-			devices_layout:add(deviceicon);
+	        local row = wibox.widget {
+				{
+					{
+					{
+					    image = beautiful[icon_name],
+					    resize = false,
+					    widget = wibox.widget.imagebox
+					},
+					{
+						markup = '<span color="' .. color .. '">' .. data.Device .. '</span>',
+						widget = wibox.widget.textbox
+					},
+					spacing = 8,
+					layout = wibox.layout.fixed.horizontal
+					},
+					margins = 8,
+					layout = wibox.container.margin
+				},
+				bg = beautiful.bg_normal,
+				fg = beautiful.fg_normal,
+				widget = wibox.container.background
+			}
 			if data.Mounted == false then
 				data.MountedPath = ""
 			else
@@ -225,8 +252,7 @@ local function scan_finished(devices)
 			if data.Label ~= '' then
 				data.Label = string.format("\n%s", data.Label)
 			end
-			---[[
-			local tooltip = awful.tooltip({objects = { deviceicon }, 
+			local row_info = awful.tooltip({objects = { row }, 
 					font =  beautiful.font,
 					border_color = beautiful.border_focus,
 					border_width = beautiful.border_width,
@@ -234,15 +260,40 @@ local function scan_finished(devices)
 					fg = beautiful.fg_normal,
 					opacity = beautiful.opacity_normal,
 					shape = gears.shape.rounded_rect,
-					align = "bottom",
+					mode = "outside",
 					margins_leftright = 10,
 					margins_topbottom = 6,
 					markup = string.format("%s\n/dev/%s\n%s%s (%s)%s",data.Name, data.Device, data.MountedPath, data.Size, data.FS, data.Label),
-				});
+			});
+			
+			row:connect_signal("mouse::enter", function(c) c:set_bg(beautiful.bg_focus) end)
+			row:connect_signal("mouse::leave", function(c) c:set_bg(beautiful.bg_normal) end)
+			row:buttons(awful.util.table.join(
+				awful.button({ }, 1, function () if data.Mounted == false then mount_device(data) else open_filemanger(data) end; end),
+				awful.button({ }, 3, function () unmount_device(data) end)
+			))
+			table.insert(rows,row);
 		end
 	end
+	popup:setup(rows)
+	popup.border_width = beautiful.border_width
+	popup.border_color = beautiful.border_focus
+	popup.opacity = beautiful.opacity,
+	udisks_widget:buttons(
+        awful.util.table.join(
+			awful.button({}, 1, function()
+				if popup.visible then
+					popup.visible = not popup.visible
+					udisks_widget:set_bg(beautiful.bg_normal)
+				else
+					popup:move_next_to(mouse.current_widget_geometry)
+					udisks_widget:set_bg(beautiful.bg_focus)
+				end
+			end)
+		)
+	)
+	return udisks_widget
 end
-
 
 if capi.dbus then
 	capi.dbus.add_match("system", "interface='org.freedesktop.DBus.ObjectManager', member='InterfacesAdded'")
@@ -258,5 +309,4 @@ end
 
 rescan_devices(scan_finished);
 
-module.widget = devices_layout;
-return module
+return setmetatable(udisks_widget, { __call = function(_, ...) return scan_finished(devices) end })
