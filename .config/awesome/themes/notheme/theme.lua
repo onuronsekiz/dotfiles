@@ -373,7 +373,7 @@ moc_tooltip = awful.tooltip{
 local keyboardwidget = wibox.widget{
 	{	
 		{
-			widget = wibox.widget{markup = 'î¥', font = theme.taglist_font, widget = wibox.widget.textbox},
+			widget = wibox.widget{markup = '', font = theme.taglist_font, widget = wibox.widget.textbox},
 		},	
 		--{
 		--	widget = keyboardlayout,
@@ -418,7 +418,7 @@ local udisks_widget_tooltip = awful.tooltip {
 local dropdownwidget = wibox.widget{
 	{	
 		{
-			widget = wibox.widget{markup = 'î§', font = theme.taglist_font, widget = wibox.widget.textbox},
+			widget = wibox.widget{markup = '', font = theme.taglist_font, widget = wibox.widget.textbox},
 		},	
 		margins = 0,
 		layout = wibox.container.margin
@@ -443,7 +443,7 @@ local dropdownwidget_tooltip = awful.tooltip {
 local flameshotwidget = wibox.widget{
 	{	
 		{
-			widget = wibox.widget{markup = 'î¥', font = theme.taglist_font, widget = wibox.widget.textbox},
+			widget = wibox.widget{markup = '', font = theme.taglist_font, widget = wibox.widget.textbox},
 		},	
 		margins = 0,
 		layout = wibox.container.margin
