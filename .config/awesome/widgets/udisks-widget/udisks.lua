@@ -17,7 +17,7 @@ local udisks_widget = wibox.widget {
 	{
 		{
 			resize = false,
-			widget = wibox.widget{markup = 'î¥', font = font, widget = wibox.widget.textbox},
+			widget = wibox.widget{markup = '', font = font, widget = wibox.widget.textbox},
     	},
     	margins = 4,
 		layout = wibox.container.margin
@@ -41,6 +41,13 @@ local function convert_size( oSize ) -- convert size from bytes to human readabl
 	return ( nSize )
 end
 
+local popup = awful.popup {
+	ontop = true,
+	visible = false,
+	shape = gears.shape.rounded_rect,
+	offset = { y = 4, x = 28 },
+	widget = {}
+}
 local function isempty(s)
 	return s == nil or s == ''
 end
