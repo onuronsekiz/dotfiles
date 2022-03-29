@@ -71,11 +71,10 @@ theme.removable_usb_unmounted     = theme.dir .. "/icons/removable_usb_unmounted
 theme.taglist_squares_sel = theme.dir .. "/icons/square.png"
 theme.taglist_squares_unsel = theme.dir .. "/icons/square.png"
 
-
 --}}}
 
 local terminal = "alacritty"
-udisks.filemanager = "pcmanfm-qt"
+udisks_filemanager = "pcmanfm-qt"
 
 --{{{ create os widgets
 local markup = lain.util.markup
@@ -374,15 +373,16 @@ moc_tooltip = awful.tooltip{
 local keyboardwidget = wibox.widget{
 	{	
 		{
-			{
-				font = theme.taglist_font,
-				widget = wibox.widget.textbox(''),
-			},
-			layout = wibox.layout.fixed.horizontal
-		},
+			widget = wibox.widget{markup = 'î¥', font = theme.taglist_font, widget = wibox.widget.textbox},
+		},	
+		--{
+		--	widget = keyboardlayout,
+		--},
+		--spacing= -4,
 		margins = 0,
 		layout = wibox.container.margin
 	},
+	shape = gears.shape.circle,
 	widget = wibox.container.background	
 }
 
@@ -396,6 +396,79 @@ local keyboardwidget_tooltip = awful.tooltip {
 	margins_topbottom = 6,
 	margins_leftright = 10,
 	markup = "<b>Virtual keyboard</b>\n\nClick to toggle",
+}
+
+--udisk storage list tooltip
+local udisks_widget_tooltip = awful.tooltip {
+	objects = { udisks },
+	font =  beautiful.font,
+	border_color = beautiful.border_focus,
+	border_width = beautiful.border_width,
+	bg = beautiful.bg_normal,
+	fg = beautiful.fg_normal,
+	opacity = beautiful.opacity_normal,
+	shape = gears.shape.rounded_rect,
+	align = "bottom",
+	margins_topbottom = 6,
+	margins_leftright = 10,
+	markup = "<b>Storage list</b>\n\nClick to toggle list.\nLeft click to mount/browse.\nRight click to unmount disk."
+}
+
+--Drop-down terminal emulator
+local dropdownwidget = wibox.widget{
+	{	
+		{
+			widget = wibox.widget{markup = 'î§', font = theme.taglist_font, widget = wibox.widget.textbox},
+		},	
+		margins = 0,
+		layout = wibox.container.margin
+	},
+	shape = gears.shape.circle,
+	widget = wibox.container.background	
+}
+
+dropdownwidget:buttons(my_table.join(awful.button({}, 1,
+function ()
+	awful.screen.focused().quake:toggle()
+end)))
+
+local dropdownwidget_tooltip = awful.tooltip {
+	objects = { dropdownwidget },
+	margins_topbottom = 6,
+	margins_leftright = 10,
+	markup = "<b>Drop-down terminal</b>\n\nClick to toggle",
+}
+
+--Screenshot tool
+local flameshotwidget = wibox.widget{
+	{	
+		{
+			widget = wibox.widget{markup = 'î¥', font = theme.taglist_font, widget = wibox.widget.textbox},
+		},	
+		margins = 0,
+		layout = wibox.container.margin
+	},
+	shape = gears.shape.circle,
+	widget = wibox.container.background	
+}
+
+flameshotwidget:buttons(my_table.join(
+awful.button({}, 1, function ()
+	awful.spawn("flameshot gui -c")
+end),
+awful.button({}, 2, function ()
+	awful.spawn("flameshot gui -p Pictures/")
+end),
+awful.button({}, 3, function ()
+	awful.spawn("flameshot full -p Pictures/")
+end)
+))
+
+local flameshotwidget_tooltip = awful.tooltip {
+	objects = { flameshotwidget },
+	margins_topbottom = 6,
+	margins_leftright = 10,
+	markup = "<b>Screenshot tool</b>\n\nLeft click to select and copy to clipboard.\nMiddle click to select and save to file.\nRight click to save screen to file.",
 }
 
 --Systray
@@ -412,7 +485,7 @@ local slspr = wibox.widget.textbox(' ')
 --{{{ function that configures virtual spaces 
 function theme.at_screen_connect(s)
 	-- Quake application
-	s.quake = lain.util.quake({ app = terminal, argname = "--title %s", extra = "--class QuakeDD", visible = true, horiz = "center", height = 0.3, width = 0.75 }) 
+	s.quake = lain.util.quake({ app = terminal, argname = "--title %s", extra = "--class QuakeDD", visible = false, horiz = "center", height = 0.3, width = 0.75 }) 
 	
 	-- Virtual keyboard
 	local virtual_keyboard = require("widgets.virtual_keyboard-widget.virtual_keyboard")
@@ -524,9 +597,13 @@ function theme.at_screen_connect(s)
 			layout = wibox.layout.fixed.horizontal,
 			s.mytaglist,
 			slspr,
-			udisks.widget,
+			udisks(),
 			slspr,
 			wibox.layout.margin(keyboardwidget, 0, 0, 1, 0),
+			slspr,
+			flameshotwidget,
+			slspr,
+			wibox.layout.margin(dropdownwidget, 0, 0, 1, 0),
 			slspr,
 			s.mypromptbox,
 			slspr,
