@@ -237,6 +237,10 @@ globalkeys = my_table.join(
 		function()
 			awful.spawn("flameshot full -d 2000 -p Pictures/")
 		end, {description = "Print Screen with 2s Delay", group = "hotkeys"}),
+	awful.key({altkey, modkey}, "Print",
+		function()
+			awful.spawn("flameshot gui -c")
+		end, {description = "Print Screen Select to Clipboard", group = "hotkeys"}),	
 	awful.key({}, "XF86AudioPlay",
 		function() 
 			os.execute("mocp -G")
