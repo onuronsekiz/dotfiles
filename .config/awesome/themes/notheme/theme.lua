@@ -388,7 +388,7 @@ local keyboardwidget = wibox.widget{
 
 keyboardwidget:buttons(my_table.join(awful.button({}, 1,
 function ()
-	os.execute("xdotool keydown super key z keyup super")
+	awful.screen.focused().virtual_keyboard:toggle()
 end)))
 
 local keyboardwidget_tooltip = awful.tooltip {
