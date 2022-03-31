@@ -452,24 +452,27 @@ local flameshotwidget = wibox.widget{
 	widget = wibox.container.background	
 }
 
-flameshotwidget:buttons(my_table.join(
-awful.button({}, 1, function ()
-	awful.spawn("flameshot gui -c")
-end),
-awful.button({}, 2, function ()
-	awful.spawn("flameshot gui -p Pictures/")
-end),
-awful.button({}, 3, function ()
-	awful.spawn("flameshot full -p Pictures/")
-end)
-))
-
 local flameshotwidget_tooltip = awful.tooltip {
 	objects = { flameshotwidget },
 	margins_topbottom = 6,
 	margins_leftright = 10,
 	markup = "<b>Screenshot tool</b>\n\nLeft click to select and copy to clipboard.\nMiddle click to select and save to file.\nRight click to save screen to file.",
 }
+
+flameshotwidget:buttons(my_table.join(
+awful.button({}, 1, function ()
+	flameshotwidget_tooltip.visible = false
+	awful.spawn("flameshot gui -c")
+end),
+awful.button({}, 2, function ()
+	flameshotwidget_tooltip.visible = false
+	awful.spawn("flameshot gui -p Pictures/")
+end),
+awful.button({}, 3, function ()
+	flameshotwidget_tooltip.visible = false
+	awful.spawn("flameshot full -p Pictures/")
+end)
+))
 
 --Systray
 local systemtray = wibox.widget.systray()
