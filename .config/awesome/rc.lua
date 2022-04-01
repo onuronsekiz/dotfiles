@@ -224,23 +224,23 @@ globalkeys = my_table.join(
 	awful.key({}, "Print",
 		function()
 			os.execute("flameshot full -p Pictures/")
-		end, {description = "Print Screen to File", group = "hotkeys"}),
+		end, {description = "Screenshot to File", group = "hotkeys"}),
 	awful.key({altkey}, "Print",
 		function()
 			os.execute("flameshot gui -p Pictures/")
-		end, {description = "Print Screen Select", group = "hotkeys"}),
+		end, {description = "Screenshot Select to File", group = "hotkeys"}),
 	awful.key({"Control"}, "Print",
 		function()
 			os.execute("flameshot full -c")
-		end, {description = "Print Screen to Clipboard", group = "hotkeys"}),
+		end, {description = "Screenshot to Clipboard", group = "hotkeys"}),
 	awful.key({"Control", modkey}, "Print",
 		function()
 			awful.spawn("flameshot full -d 2000 -p Pictures/")
-		end, {description = "Print Screen with 2s Delay", group = "hotkeys"}),
+		end, {description = "Screenshot with 2s Delay", group = "hotkeys"}),
 	awful.key({altkey, modkey}, "Print",
 		function()
 			awful.spawn("flameshot gui -c")
-		end, {description = "Print Screen Select to Clipboard", group = "hotkeys"}),	
+		end, {description = "Screen Select to Clipboard", group = "hotkeys"}),	
 	awful.key({}, "XF86AudioPlay",
 		function() 
 			os.execute("mocp -G")
