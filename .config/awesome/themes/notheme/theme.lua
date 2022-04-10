@@ -8,10 +8,12 @@ local naughty = require("naughty")
 --local dpi = require("beautiful.xresources").apply_dpi
 local udisks = require("widgets.udisks-widget.udisks")
 local logout_menu = require("widgets.logout-menu-widget.logout-menu")
+local volume_menu = require("widgets.volume-widget.volume")
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
 local theme = {}
 
+theme.volume = volume_menu.widget
 theme.dir = os.getenv("HOME") .. "/.config/awesome/themes/notheme"
 --theme.wallpaper = theme.dir .. "/void-wallpaper.png"
 theme.wallpaper = theme.dir .. "/cthulhu-wallpaper.png"
@@ -98,15 +100,14 @@ theme.cal = lain.widget.cal({
 })
 
 -- MEM
-local memicon = wibox.widget.textbox('<span color="#E5C07B">MEM:  </span>')
-local mem = lain.widget.mem({
+local memicon = lain.widget.mem({
 	settings = function()
-		widget:set_markup('<span color="#E5C07B">' .. mem_now.used .. 'MB</span>')
+		widget:set_markup('<span color="#E5C07B">MEM:  ' .. mem_now.used .. 'MB</span>')
 	end
 })
 
 local mem_tooltip = awful.tooltip {
-	objects = { memicon },
+	objects = { memicon.widget },
 	margins_topbottom = 6,
 	margins_leftright = 10,
 	font = theme.mono_font,
@@ -119,15 +120,14 @@ local mem_tooltip = awful.tooltip {
 }
 
 -- CPU
-local cpuicon = wibox.widget.textbox('<span color="#E06C75">CPU:  </span>')
-local cpu = lain.widget.cpu({
+local cpuicon = lain.widget.cpu({
 		settings = function()
-				widget:set_markup('<span color="#E06C75">' .. cpu_now.usage .. '%</span>')
+				widget:set_markup('<span color="#E06C75">CPU:  ' .. cpu_now.usage .. '%</span>')
 		end
 })
 
 local cpu_tooltip = awful.tooltip {
-	objects = { cpuicon },
+	objects = { cpuicon.widget },
 	margins_topbottom = 6,
 	margins_leftright = 10,
 	font = theme.mono_font,
@@ -140,9 +140,8 @@ local cpu_tooltip = awful.tooltip {
 }
 
 -- FileSystem
-local fsicon = wibox.widget.textbox('<span color="#9A3AC7">FS:  </span>')
-local fsroot = awful.widget.watch([[bash -c "df -h / | tail -n 1 | awk '{print $(NF-1)}'"]], 15, function(widget,stdout) 
-	widget:set_markup('<span color="#9A3AC7">' .. stdout .. '</span>')
+local fsicon = awful.widget.watch([[bash -c "df -h / | tail -n 1 | awk '{print $(NF-1)}'"]], 15, function(widget,stdout) 
+	widget:set_markup('<span color="#9A3AC7">FS:  ' .. stdout .. '</span>')
 end)
 
 local fs_tooltip = awful.tooltip {
@@ -164,20 +163,19 @@ local fs_tooltip = awful.tooltip {
 }
 
 -- Battery
-local baticon = wibox.widget.textbox('<span color="#61AFEF">BAT:  </span>')
-local bat = lain.widget.bat({
+local baticon = lain.widget.bat({
 		battery = "BAT0",
 		settings = function()
 			if bat_now.status ~= "N/A" then
-				widget:set_markup('<span color="#61AFEF">' .. bat_now.perc .. '%</span>')
+				widget:set_markup('<span color="#61AFEF">BAT:  ' .. bat_now.perc .. '%</span>')
 			else
-				widget:set_markup('<span color="#61AFEF">' .. "AC" .. '</span>')
+				widget:set_markup('<span color="#61AFEF">BAT:  ' .. "AC" .. '</span>')
 			end
 		end
 })
 
 local bat_tooltip = awful.tooltip {
-	objects = { baticon },
+	objects = { baticon.widget },
 	margins_topbottom = 6,
 	margins_leftright = 10,
 	timer_function = function()
@@ -195,15 +193,14 @@ local bat_tooltip = awful.tooltip {
 }
 
 -- Net
-local neticon = wibox.widget.textbox('<span color="#ABB2BF">NET:  </span>')
-local net = lain.widget.net({
+local neticon = lain.widget.net({
 	settings = function()
-		widget:set_markup('<span color= "#ABB2BF">' .. net_now.received .. " ↓↑ " .. net_now.sent .. '</span>')
+		widget:set_markup('<span color= "#ABB2BF">NET:  ' .. net_now.received .. " ↓↑ " .. net_now.sent .. '</span>')
 	end
 })
 
 local net_tooltip = awful.tooltip {
-	objects = { neticon },
+	objects = { neticon.widget },
 	font = theme.mono_font,
 	margins_topbottom = 6,
 	margins_leftright = 10,
@@ -221,55 +218,14 @@ local net_tooltip = awful.tooltip {
 }
 
 -- ALSA volume
-local volicon = wibox.widget.textbox('<span color="#98c379">VOL:  </span>')
-theme.volume = lain.widget.alsa({
-		settings = function()
-			if volume_now.status == "off" then
-				volicon:set_markup('<span color="#98c379">VOL muted:  </span>')
-			else
-				volicon:set_markup('<span color="#98c379">VOL:  </span>')
-			end
-			widget:set_markup('<span color="#98c379">' .. volume_now.level .. '%</span>')
-		end
-	})
-
-theme.volume.widget:buttons(awful.util.table.join(
-	awful.button({}, 2, function()
-		os.execute(string.format("%s set %s 100%%", theme.volume.cmd, theme.volume.channel))
-		theme.volume.update()
-	end),
-	awful.button({}, 1, function()
-		os.execute(string.format("%s set %s toggle", theme.volume.cmd, theme.volume.togglechannel or theme.volume.channel))
-		theme.volume.update()
-	end),
-	awful.button({}, 4, function ()
-		awful.util.spawn("amixer set Master 5%+")
-		theme.volume.update()
-	end),
-	awful.button({}, 5, function ()
-		awful.util.spawn("amixer set Master 5%-")
-		theme.volume.update()
-	end)
-))
-
-volicon:buttons(awful.util.table.join(
-	awful.button({}, 3, function()
-		awful.spawn(string.format("%s -e pulsemixer", terminal))
-	end))
-)
-
 local vol_tooltip = awful.tooltip {
-	objects = { volicon },
+	objects = { volume_menu().widget },
 	margins_topbottom = 6,
 	margins_leftright = 10,
-	timer_function = function()
-		local cmd = [[pacmd list-sinks | sed -n '/*/,$!d; s/Built-in\ Audio\ //g; /device.description/ {s/.*"\(.*\)"[^"]*$/    \1/; s/[ \t]\?,[ \t]\?/,/g; s/^[ \t]\+//g; s/[ \t]\+$//g; p;q;}' | awk '{print "<b>Sink : </b>" $0}' && pacmd list-sources | sed -n '/*/,$!d; /device.description/ {s/.*"\(.*\)"[^"]*$/\1/;p;q;}' | awk '{print "<b>Source : </b>" $0}']]
-		awful.spawn.easy_async_with_shell(cmd, function(result) vol_tooltip_text = result end)
-		vol_tooltip_text = string.format("%s\n\n%s", "<b>Audio devices</b>", vol_tooltip_text):gsub("\n[^\n]*$", "")
-	return vol_tooltip_text
-	end,
+	markup = "<b>Sound status</b>\n\nLeft click to mute/unmute.\nRight click to toggle devices.\nMiddle click to open mixer.\nScroll to raise/lower volume."
 }
 
+-- Music MOC widget
 local prev_icon = wibox.widget.textbox('')
 local next_icon = wibox.widget.textbox('')
 local stop_icon = wibox.widget.textbox('')
@@ -350,9 +306,7 @@ musicwidget:buttons(my_table.join(awful.button({}, 3,
 function ()
 	awful.spawn(string.format("%s --title mocp -e mocp", terminal))
 end)))
---]]
 
----[[
 moc_tooltip = awful.tooltip{
 	objects = { musicwidget },
 	margins_topbottom = 6,
@@ -398,7 +352,7 @@ local keyboardwidget_tooltip = awful.tooltip {
 	markup = "<b>Virtual keyboard</b>\n\nClick to toggle",
 }
 
---udisk storage list tooltip
+--Udisk storage list
 local udisks_widget_tooltip = awful.tooltip {
 	objects = { udisks },
 	font =  beautiful.font,
@@ -614,28 +568,21 @@ function theme.at_screen_connect(s)
 		s.mytasklist,
 		{
 			spr,
-			eth_icon,
 			neticon,
-			net,
 			spr,
 			fsicon,
-			fsroot,
 			spr,
 			memicon,
-			mem,
 			spr,
 			cpuicon,
-			cpu,
 			spr,
 			baticon,
-			bat,
 			spr,
-			volicon,
-			theme.volume,
+			layout = wibox.layout.fixed.horizontal,
+			volume_menu().widget,
 			slspr,
 			wibox.layout.margin(musicwidget,1,0,-1,0),
 			slspr,
-			layout = wibox.layout.fixed.horizontal,
 			wibox.layout.margin(systemtray,0,0,5,3),
 			clock,
 			slspr,
@@ -649,8 +596,6 @@ function theme.at_screen_connect(s)
 		top=30, 
 		bottom=0
 	})
-	--}}}
 end
---}}}
 
 return theme
