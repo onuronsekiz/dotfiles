@@ -275,6 +275,20 @@ local function scan_finished(devices)
 			
 			row:connect_signal("mouse::enter", function(c) c:set_bg(beautiful.bg_focus) end)
 			row:connect_signal("mouse::leave", function(c) c:set_bg(beautiful.bg_normal) end)
+			
+			local old_cursor, old_wibox
+			row:connect_signal("mouse::enter", function()
+				local wb = mouse.current_wibox
+				old_cursor, old_wibox = wb.cursor, wb
+				wb.cursor = "hand1"
+			end)
+			row:connect_signal("mouse::leave", function()
+				if old_wibox then
+					old_wibox.cursor = old_cursor
+					old_wibox = nil
+				end
+			end)
+
 			row:buttons(awful.util.table.join(
 				awful.button({ }, 1, function () if data.Mounted == false then mount_device(data) else open_filemanger(data) end; end),
 				awful.button({ }, 3, function () unmount_device(data) end)
@@ -288,7 +302,7 @@ local function scan_finished(devices)
 	popup.opacity = beautiful.opacity,
 	udisks_widget:buttons(
         awful.util.table.join(
-			awful.button({}, 1, function()
+			awful.button({}, 3, function()
 				if popup.visible then
 					popup.visible = not popup.visible
 					udisks_widget:set_bg(beautiful.bg_normal)
