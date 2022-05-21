@@ -315,9 +315,6 @@ globalkeys = my_table.join(
 		function()
 			for s in screen do
 				s.mywibox.visible = not s.mywibox.visible
-				if s.mybottomwibox then
-					s.mybottomwibox.visible = not s.mybottomwibox.visible
-				end
 			end
 		end, {description = "toggle wibox", group = "awesome"}),
 	awful.key({modkey}, "t",
