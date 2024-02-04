@@ -1,0 +1,64 @@
+[colors.bright]
+black = "#181818"
+blue = "#819AFF"
+cyan = "#87ceeb"
+green = "#C2D94C"
+magenta = "#8181a6"
+red = "#ff6a6a"
+white = "#c1cdc1"
+yellow = "#ff9800"
+
+[colors.cursor]
+cursor = "#c2c2b0"
+text = "#111111"
+
+[colors.normal]
+black = "#111111"
+blue = "#0d73cc"
+cyan = "#528b8b"
+green = "#91B362"
+magenta = "#8f6f8f"
+red = "#aa4450"
+white = "#d3d3d3"
+yellow = "#cc8800"
+
+[colors.primary]
+background = "#0c0c0c"
+foreground = "#c2c2b0"
+
+[colors.selection]
+background = "#8f8f8f"
+text = "#1B1B1B"
+
+[env]
+TERM = "xterm-256color"
+WINIT_X11_SCALE_FACTOR = "1"
+
+[font]
+size = 11.0
+
+[font.normal]
+family = "Dejavu Sans Mono"
+
+[[keyboard.bindings]]
+action = "ScrollLineUp"
+key = "Up"
+mode = "~Alt"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "ScrollLineDown"
+key = "Down"
+mode = "~Alt"
+mods = "Shift"
+
+[selection]
+save_to_clipboard = true
+
+[window]
+dynamic_title = true
+opacity = 0.95
+
+[window.padding]
+x = 5
+y = 5
